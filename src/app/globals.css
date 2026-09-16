@@ -1,0 +1,109 @@
+@import "tailwindcss";
+
+/* Dark theme is the default (matches system dark preference and no-JS fallback) */
+:root {
+  --bg: #14181f;
+  --bg-raised: #1b212a;
+  --fg: #ece9e0;
+  --fg-dim: #8b93a0;
+  --line: rgba(236, 233, 224, 0.14);
+  --accent: #e2a73e;
+}
+
+:root[data-theme="light"] {
+  --bg: #f6f4ee;
+  --bg-raised: #ffffff;
+  --fg: #14181f;
+  --fg-dim: #5a5f57;
+  --line: rgba(20, 24, 31, 0.14);
+  --accent: #c98d1f;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-raised: var(--bg-raised);
+  --color-accent: var(--accent);
+  --font-display: "Space Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --font-body: "Source Serif 4", Georgia, "Times New Roman", serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  line-height: 1.7;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+/* Rendered markdown for blog posts */
+.prose-post h1,
+.prose-post h2,
+.prose-post h3 {
+  font-family: var(--font-display);
+  margin-top: 2em;
+  margin-bottom: 0.5em;
+}
+.prose-post h1 {
+  font-size: 1.75rem;
+}
+.prose-post h2 {
+  font-size: 1.4rem;
+}
+.prose-post h3 {
+  font-size: 1.15rem;
+}
+.prose-post p {
+  margin: 1.1em 0;
+}
+.prose-post ul,
+.prose-post ol {
+  margin: 1.1em 0;
+  padding-left: 1.4em;
+}
+.prose-post li {
+  margin: 0.4em 0;
+}
+.prose-post a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.prose-post code {
+  background: var(--bg-raised);
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+.prose-post pre {
+  background: var(--bg-raised);
+  padding: 1em;
+  border-radius: 8px;
+  overflow-x: auto;
+}
+.prose-post pre code {
+  background: none;
+  padding: 0;
+}
+.prose-post blockquote {
+  border-left: 2px solid var(--accent);
+  padding-left: 1em;
+  color: var(--fg-dim);
+  margin: 1.1em 0;
+}
+.prose-post img {
+  max-width: 100%;
+  border-radius: 8px;
+}
