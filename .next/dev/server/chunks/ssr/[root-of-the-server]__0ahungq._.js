@@ -197,6 +197,8 @@ __turbopack_context__.s([
     ()=>deleteProject,
     "deleteProjectPdf",
     ()=>deleteProjectPdf,
+    "getAllProjectPdfs",
+    ()=>getAllProjectPdfs,
     "getPost",
     ()=>getPost,
     "getPosts",
@@ -263,6 +265,14 @@ async function getProjectPdfs(slug) {
             size: 0
         };
     });
+}
+async function getAllProjectPdfs() {
+    const projects = await getProjects();
+    const results = await Promise.all(projects.map(async (project)=>({
+            project,
+            pdfs: await getProjectPdfs(project.slug)
+        })));
+    return results.filter((r)=>r.pdfs.length > 0);
 }
 async function getProjectPdfBytes(slug, filename) {
     const result = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$github$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["getFileBytes"])(`${pdfDir(slug)}/${filename}`);

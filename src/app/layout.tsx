@@ -17,12 +17,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        {/* Set the theme before paint so there's no flash of the wrong theme. */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `(function(){try{var t=localStorage.getItem('theme');if(!t){t=window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';}document.documentElement.setAttribute('data-theme',t);}catch(e){}})();`,
-          }}
-        />
       </head>
       <body className="antialiased flex flex-col min-h-screen">
         <SiteHeader />

@@ -89,6 +89,19 @@ export async function getProjectPdfs(slug: string): Promise<PdfEntry[]> {
     });
 }
 
+export async function getAllProjectPdfs(): Promise<
+  { project: Project; pdfs: PdfEntry[] }[]
+> {
+  const projects = await getProjects();
+  const results = await Promise.all(
+    projects.map(async (project) => ({
+      project,
+      pdfs: await getProjectPdfs(project.slug),
+    }))
+  );
+  return results.filter((r) => r.pdfs.length > 0);
+}
+
 export async function getProjectPdfBytes(
   slug: string,
   filename: string

@@ -6,10 +6,13 @@ export default function ThemeToggle() {
   // Lazy initializer reads the attribute the inline layout script already
   // set on <html> before hydration — no effect needed, and it matches
   // what's on the page rather than guessing during SSR.
-  const [theme, setTheme] = useState<"dark" | "light" | null>(() => {
-    if (typeof document === "undefined") return null;
-    return document.documentElement.getAttribute("data-theme") === "light" ? "light" : "dark";
-  });
+ const [theme, setTheme] = useState<"dark" | "light" | null>(() => {
+  if (typeof window === "undefined") return null;
+  const stored = localStorage.getItem("theme");
+  const value = stored ?? (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+  document.documentElement.setAttribute("data-theme", value);
+  return value as "dark" | "light";
+});
 
   function toggle() {
     const next = theme === "light" ? "dark" : "light";

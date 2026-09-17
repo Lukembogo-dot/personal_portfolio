@@ -2622,8 +2622,12 @@ function ThemeToggle() {
     // what's on the page rather than guessing during SSR.
     const [theme, setTheme] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])({
         "ThemeToggle.useState": ()=>{
-            if (typeof document === "undefined") return null;
-            return document.documentElement.getAttribute("data-theme") === "light" ? "light" : "dark";
+            if ("TURBOPACK compile-time falsy", 0) //TURBOPACK unreachable
+            ;
+            const stored = localStorage.getItem("theme");
+            const value = stored ?? (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+            document.documentElement.setAttribute("data-theme", value);
+            return value;
         }
     }["ThemeToggle.useState"]);
     function toggle() {
@@ -2639,7 +2643,7 @@ function ThemeToggle() {
             "aria-hidden": "true"
         }, void 0, false, {
             fileName: "[project]/src/components/ThemeToggle.tsx",
-            lineNumber: 23,
+            lineNumber: 26,
             columnNumber: 12
         }, this);
     }
@@ -2658,12 +2662,12 @@ function ThemeToggle() {
                 d: "M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"
             }, void 0, false, {
                 fileName: "[project]/src/components/ThemeToggle.tsx",
-                lineNumber: 34,
+                lineNumber: 37,
                 columnNumber: 11
             }, this)
         }, void 0, false, {
             fileName: "[project]/src/components/ThemeToggle.tsx",
-            lineNumber: 33,
+            lineNumber: 36,
             columnNumber: 9
         }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
             width: "16",
@@ -2679,29 +2683,29 @@ function ThemeToggle() {
                     r: "4"
                 }, void 0, false, {
                     fileName: "[project]/src/components/ThemeToggle.tsx",
-                    lineNumber: 38,
+                    lineNumber: 41,
                     columnNumber: 11
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
                     d: "M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"
                 }, void 0, false, {
                     fileName: "[project]/src/components/ThemeToggle.tsx",
-                    lineNumber: 39,
+                    lineNumber: 42,
                     columnNumber: 11
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/src/components/ThemeToggle.tsx",
-            lineNumber: 37,
+            lineNumber: 40,
             columnNumber: 9
         }, this)
     }, void 0, false, {
         fileName: "[project]/src/components/ThemeToggle.tsx",
-        lineNumber: 27,
+        lineNumber: 30,
         columnNumber: 5
     }, this);
 }
-_s(ThemeToggle, "XLQwDbE/v4QUqOS2KfnnDhbF6Ig=");
+_s(ThemeToggle, "RBZ9jmW12GFekgZcY9YAkLPoPKU=");
 _c = ThemeToggle;
 var _c;
 __turbopack_context__.k.register(_c, "ThemeToggle");
