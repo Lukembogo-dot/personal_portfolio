@@ -69,6 +69,20 @@ export async function getFileBytes(
   if (!res.ok) throw new Error(`GitHub getFileBytes failed (${res.status}): ${await res.text()}`);
 
   const data = await res.json();
+  if (data.download_url) {
+    const raw = await fetch(`${apiUrl(path)}?ref=${BRANCH}`, {
+      headers: { ...headers(), Accept: "application/vnd.github.raw" },
+      cache: "no-store",
+    });
+    if (!raw.ok) {
+      throw new Error(`GitHub raw file download failed (${raw.status}): ${await raw.text()}`);
+    }
+    return { sha: data.sha, bytes: Buffer.from(await raw.arrayBuffer()) };
+  }
+
+  if (typeof data.content !== "string") {
+    throw new Error("GitHub did not return PDF content or a download URL");
+  }
   return { sha: data.sha, bytes: Buffer.from(data.content, "base64") };
 }
 

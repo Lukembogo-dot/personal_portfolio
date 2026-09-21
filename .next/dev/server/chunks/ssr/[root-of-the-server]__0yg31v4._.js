@@ -84,7 +84,7 @@ async function AdminPage({ searchParams }) {
                         children: "Admin"
                     }, void 0, false, {
                         fileName: "[project]/src/app/admin/page.tsx",
-                        lineNumber: 25,
+                        lineNumber: 32,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -92,7 +92,7 @@ async function AdminPage({ searchParams }) {
                         children: "Sign in to manage projects, PDFs, and blog posts."
                     }, void 0, false, {
                         fileName: "[project]/src/app/admin/page.tsx",
-                        lineNumber: 26,
+                        lineNumber: 33,
                         columnNumber: 11
                     }, this),
                     error && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -100,7 +100,7 @@ async function AdminPage({ searchParams }) {
                         children: "Incorrect password."
                     }, void 0, false, {
                         fileName: "[project]/src/app/admin/page.tsx",
-                        lineNumber: 29,
+                        lineNumber: 36,
                         columnNumber: 21
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -111,7 +111,7 @@ async function AdminPage({ searchParams }) {
                         className: "w-full bg-transparent border border-[var(--line)] rounded px-3 py-2 text-sm mb-4"
                     }, void 0, false, {
                         fileName: "[project]/src/app/admin/page.tsx",
-                        lineNumber: 30,
+                        lineNumber: 37,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -120,28 +120,30 @@ async function AdminPage({ searchParams }) {
                         children: "Sign in"
                     }, void 0, false, {
                         fileName: "[project]/src/app/admin/page.tsx",
-                        lineNumber: 37,
+                        lineNumber: 44,
                         columnNumber: 11
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/admin/page.tsx",
-                lineNumber: 20,
+                lineNumber: 27,
                 columnNumber: 9
             }, this)
         }, void 0, false, {
             fileName: "[project]/src/app/admin/page.tsx",
-            lineNumber: 19,
+            lineNumber: 26,
             columnNumber: 7
         }, this);
     }
     let projects = [];
     let posts = [];
     let pdfs = {};
+    let documents = [];
     let loadError = "";
     try {
         projects = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$content$2d$store$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["getProjects"])();
         posts = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$content$2d$store$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["getPosts"])();
+        documents = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$content$2d$store$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["getDocuments"])();
         const pdfLists = await Promise.all(projects.map(async (p)=>[
                 p.slug,
                 await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$content$2d$store$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["getProjectPdfs"])(p.slug)
@@ -161,7 +163,7 @@ async function AdminPage({ searchParams }) {
                         children: "Admin"
                     }, void 0, false, {
                         fileName: "[project]/src/app/admin/page.tsx",
-                        lineNumber: 67,
+                        lineNumber: 76,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
@@ -173,18 +175,18 @@ async function AdminPage({ searchParams }) {
                             children: "Sign out"
                         }, void 0, false, {
                             fileName: "[project]/src/app/admin/page.tsx",
-                            lineNumber: 69,
+                            lineNumber: 78,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/src/app/admin/page.tsx",
-                        lineNumber: 68,
+                        lineNumber: 77,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/admin/page.tsx",
-                lineNumber: 66,
+                lineNumber: 75,
                 columnNumber: 7
             }, this),
             loadError ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -196,21 +198,22 @@ async function AdminPage({ searchParams }) {
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/admin/page.tsx",
-                lineNumber: 79,
+                lineNumber: 88,
                 columnNumber: 9
             }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$admin$2f$AdminDashboard$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"], {
                 initialProjects: projects,
                 initialPosts: posts,
-                initialPdfs: pdfs
+                initialPdfs: pdfs,
+                initialDocuments: documents
             }, void 0, false, {
                 fileName: "[project]/src/app/admin/page.tsx",
-                lineNumber: 84,
+                lineNumber: 93,
                 columnNumber: 9
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/app/admin/page.tsx",
-        lineNumber: 65,
+        lineNumber: 74,
         columnNumber: 5
     }, this);
 }
@@ -266,8 +269,12 @@ function verifyToken(token) {
 "use strict";
 
 __turbopack_context__.s([
+    "addDocument",
+    ()=>addDocument,
     "addProjectPdf",
     ()=>addProjectPdf,
+    "deleteDocument",
+    ()=>deleteDocument,
     "deletePost",
     ()=>deletePost,
     "deleteProject",
@@ -276,6 +283,10 @@ __turbopack_context__.s([
     ()=>deleteProjectPdf,
     "getAllProjectPdfs",
     ()=>getAllProjectPdfs,
+    "getDocumentBytes",
+    ()=>getDocumentBytes,
+    "getDocuments",
+    ()=>getDocuments,
     "getPost",
     ()=>getPost,
     "getPosts",
@@ -370,6 +381,49 @@ async function deleteProjectPdf(slug, filename) {
     const existing = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$github$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["getFileBytes"])(path);
     if (!existing) return;
     await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$github$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["deleteFile"])(path, existing.sha, `Remove PDF from ${slug}: ${filename}`);
+}
+const DOCUMENTS_DIR = "content/documents";
+function documentMetadataPath(filename) {
+    return `${DOCUMENTS_DIR}/${filename}.json`;
+}
+async function getDocuments() {
+    const entries = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$github$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["listDir"])(DOCUMENTS_DIR);
+    const metadataFiles = entries.filter((entry)=>entry.type === "file" && entry.name.endsWith(".json"));
+    const documents = await Promise.all(metadataFiles.map(async (entry)=>{
+        const file = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$github$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["getFile"])(entry.path);
+        if (!file) return null;
+        return JSON.parse(file.content);
+    }));
+    return documents.filter((document)=>document !== null).sort((a, b)=>a.title.localeCompare(b.title));
+}
+async function getDocumentBytes(filename) {
+    const result = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$github$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["getFileBytes"])(`${DOCUMENTS_DIR}/${filename}`);
+    return result?.bytes ?? null;
+}
+async function addDocument(originalName, title, description, postSlug, bytes) {
+    const safeName = originalName.replace(/[^a-zA-Z0-9._-]/g, "_");
+    const filename = `${Date.now()}__${safeName}`;
+    const entry = {
+        filename,
+        originalName,
+        title,
+        description,
+        postSlug,
+        size: bytes.length
+    };
+    await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$github$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["putFileBytes"])(`${DOCUMENTS_DIR}/${filename}`, bytes, `Add document: ${title}`);
+    await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$github$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["putFile"])(documentMetadataPath(filename), JSON.stringify(entry, null, 2), `Add document metadata: ${title}`);
+    return entry;
+}
+async function deleteDocument(filename) {
+    const pdfPath = `${DOCUMENTS_DIR}/${filename}`;
+    const existingPdf = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$github$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["getFileBytes"])(pdfPath);
+    if (existingPdf) await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$github$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["deleteFile"])(pdfPath, existingPdf.sha, `Remove document: ${filename}`);
+    const metadataPath = documentMetadataPath(filename);
+    const existingMetadata = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$github$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["getFile"])(metadataPath);
+    if (existingMetadata) {
+        await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$github$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["deleteFile"])(metadataPath, existingMetadata.sha, `Remove document metadata: ${filename}`);
+    }
 }
 const POSTS_DIR = "content/posts";
 async function getPosts() {
@@ -470,6 +524,25 @@ async function getFileBytes(path) {
     if (res.status === 404) return null;
     if (!res.ok) throw new Error(`GitHub getFileBytes failed (${res.status}): ${await res.text()}`);
     const data = await res.json();
+    if (data.download_url) {
+        const raw = await fetch(`${apiUrl(path)}?ref=${BRANCH}`, {
+            headers: {
+                ...headers(),
+                Accept: "application/vnd.github.raw"
+            },
+            cache: "no-store"
+        });
+        if (!raw.ok) {
+            throw new Error(`GitHub raw file download failed (${raw.status}): ${await raw.text()}`);
+        }
+        return {
+            sha: data.sha,
+            bytes: Buffer.from(await raw.arrayBuffer())
+        };
+    }
+    if (typeof data.content !== "string") {
+        throw new Error("GitHub did not return PDF content or a download URL");
+    }
     return {
         sha: data.sha,
         bytes: Buffer.from(data.content, "base64")

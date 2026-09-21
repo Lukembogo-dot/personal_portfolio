@@ -50,7 +50,7 @@ async function Home() {
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                         className: "text-sm text-[var(--accent)] mb-4",
-                        children: "Full-stack developer — Nairobi, Kenya"
+                        children: "IT Professional | Software, Cloud and Network Infrastructure, Cybersecurity, QA & Technology — Nairobi, Kenya"
                     }, void 0, false, {
                         fileName: "[project]/src/app/page.tsx",
                         lineNumber: 13,
@@ -58,7 +58,7 @@ async function Home() {
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
                         className: "font-[family-name:var(--font-display)] text-[2.25rem] leading-[1.15] lg:text-[3rem] max-w-3xl",
-                        children: "I build software that runs real operations — pharmacies, farms, and the systems behind them."
+                        children: "I solve IT problems wherever they sit — infrastructure, quality, or the code itself."
                     }, void 0, false, {
                         fileName: "[project]/src/app/page.tsx",
                         lineNumber: 16,
@@ -66,10 +66,10 @@ async function Home() {
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                         className: "mt-6 text-lg text-[var(--fg-dim)] max-w-[56ch]",
-                        children: "Business IT graduate working across backend development, QA, and data engineering. I care less about demos and more about software that has to keep working after launch."
+                        children: "Business IT graduate with hands-on experience across ICT administration, QA/testing, backend development, and data engineering. I've built and shipped platforms end to end, from multi-tenant SaaS to data pipelines, not just one layer of them."
                     }, void 0, false, {
                         fileName: "[project]/src/app/page.tsx",
-                        lineNumber: 20,
+                        lineNumber: 19,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -81,7 +81,7 @@ async function Home() {
                                 children: "View projects"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/page.tsx",
-                                lineNumber: 26,
+                                lineNumber: 25,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$react$2d$server$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"], {
@@ -90,13 +90,13 @@ async function Home() {
                                 children: "Get in touch"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/page.tsx",
-                                lineNumber: 32,
+                                lineNumber: 31,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/page.tsx",
-                        lineNumber: 25,
+                        lineNumber: 24,
                         columnNumber: 9
                     }, this)
                 ]
@@ -116,7 +116,7 @@ async function Home() {
                                 children: "Featured work"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/page.tsx",
-                                lineNumber: 44,
+                                lineNumber: 43,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$react$2d$server$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"], {
@@ -125,13 +125,13 @@ async function Home() {
                                 children: "All projects →"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/page.tsx",
-                                lineNumber: 45,
+                                lineNumber: 44,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/page.tsx",
-                        lineNumber: 43,
+                        lineNumber: 42,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -145,7 +145,7 @@ async function Home() {
                                         children: project.name
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/page.tsx",
-                                        lineNumber: 56,
+                                        lineNumber: 55,
                                         columnNumber: 17
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -153,24 +153,24 @@ async function Home() {
                                         children: project.role
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/page.tsx",
-                                        lineNumber: 59,
+                                        lineNumber: 58,
                                         columnNumber: 17
                                     }, this)
                                 ]
                             }, project.slug, true, {
                                 fileName: "[project]/src/app/page.tsx",
-                                lineNumber: 51,
+                                lineNumber: 50,
                                 columnNumber: 15
                             }, this))
                     }, void 0, false, {
                         fileName: "[project]/src/app/page.tsx",
-                        lineNumber: 49,
+                        lineNumber: 48,
                         columnNumber: 11
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/page.tsx",
-                lineNumber: 42,
+                lineNumber: 41,
                 columnNumber: 9
             }, this)
         ]
@@ -189,8 +189,12 @@ __turbopack_context__.n(__turbopack_context__.i("[project]/src/app/page.tsx [app
 "use strict";
 
 __turbopack_context__.s([
+    "addDocument",
+    ()=>addDocument,
     "addProjectPdf",
     ()=>addProjectPdf,
+    "deleteDocument",
+    ()=>deleteDocument,
     "deletePost",
     ()=>deletePost,
     "deleteProject",
@@ -199,6 +203,10 @@ __turbopack_context__.s([
     ()=>deleteProjectPdf,
     "getAllProjectPdfs",
     ()=>getAllProjectPdfs,
+    "getDocumentBytes",
+    ()=>getDocumentBytes,
+    "getDocuments",
+    ()=>getDocuments,
     "getPost",
     ()=>getPost,
     "getPosts",
@@ -293,6 +301,49 @@ async function deleteProjectPdf(slug, filename) {
     const existing = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$github$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["getFileBytes"])(path);
     if (!existing) return;
     await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$github$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["deleteFile"])(path, existing.sha, `Remove PDF from ${slug}: ${filename}`);
+}
+const DOCUMENTS_DIR = "content/documents";
+function documentMetadataPath(filename) {
+    return `${DOCUMENTS_DIR}/${filename}.json`;
+}
+async function getDocuments() {
+    const entries = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$github$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["listDir"])(DOCUMENTS_DIR);
+    const metadataFiles = entries.filter((entry)=>entry.type === "file" && entry.name.endsWith(".json"));
+    const documents = await Promise.all(metadataFiles.map(async (entry)=>{
+        const file = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$github$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["getFile"])(entry.path);
+        if (!file) return null;
+        return JSON.parse(file.content);
+    }));
+    return documents.filter((document)=>document !== null).sort((a, b)=>a.title.localeCompare(b.title));
+}
+async function getDocumentBytes(filename) {
+    const result = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$github$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["getFileBytes"])(`${DOCUMENTS_DIR}/${filename}`);
+    return result?.bytes ?? null;
+}
+async function addDocument(originalName, title, description, postSlug, bytes) {
+    const safeName = originalName.replace(/[^a-zA-Z0-9._-]/g, "_");
+    const filename = `${Date.now()}__${safeName}`;
+    const entry = {
+        filename,
+        originalName,
+        title,
+        description,
+        postSlug,
+        size: bytes.length
+    };
+    await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$github$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["putFileBytes"])(`${DOCUMENTS_DIR}/${filename}`, bytes, `Add document: ${title}`);
+    await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$github$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["putFile"])(documentMetadataPath(filename), JSON.stringify(entry, null, 2), `Add document metadata: ${title}`);
+    return entry;
+}
+async function deleteDocument(filename) {
+    const pdfPath = `${DOCUMENTS_DIR}/${filename}`;
+    const existingPdf = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$github$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["getFileBytes"])(pdfPath);
+    if (existingPdf) await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$github$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["deleteFile"])(pdfPath, existingPdf.sha, `Remove document: ${filename}`);
+    const metadataPath = documentMetadataPath(filename);
+    const existingMetadata = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$github$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["getFile"])(metadataPath);
+    if (existingMetadata) {
+        await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$github$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["deleteFile"])(metadataPath, existingMetadata.sha, `Remove document metadata: ${filename}`);
+    }
 }
 const POSTS_DIR = "content/posts";
 async function getPosts() {
@@ -393,6 +444,25 @@ async function getFileBytes(path) {
     if (res.status === 404) return null;
     if (!res.ok) throw new Error(`GitHub getFileBytes failed (${res.status}): ${await res.text()}`);
     const data = await res.json();
+    if (data.download_url) {
+        const raw = await fetch(`${apiUrl(path)}?ref=${BRANCH}`, {
+            headers: {
+                ...headers(),
+                Accept: "application/vnd.github.raw"
+            },
+            cache: "no-store"
+        });
+        if (!raw.ok) {
+            throw new Error(`GitHub raw file download failed (${raw.status}): ${await raw.text()}`);
+        }
+        return {
+            sha: data.sha,
+            bytes: Buffer.from(await raw.arrayBuffer())
+        };
+    }
+    if (typeof data.content !== "string") {
+        throw new Error("GitHub did not return PDF content or a download URL");
+    }
     return {
         sha: data.sha,
         bytes: Buffer.from(data.content, "base64")

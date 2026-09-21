@@ -128,6 +128,81 @@ export async function deleteProjectPdf(slug: string, filename: string): Promise<
   await deleteFile(path, existing.sha, `Remove PDF from ${slug}: ${filename}`);
 }
 
+// ---- standalone documents ----
+
+export type DocumentEntry = {
+  filename: string;
+  originalName: string;
+  title: string;
+  description: string;
+  postSlug: string;
+  size: number;
+};
+
+const DOCUMENTS_DIR = "content/documents";
+
+function documentMetadataPath(filename: string) {
+  return `${DOCUMENTS_DIR}/${filename}.json`;
+}
+
+export async function getDocuments(): Promise<DocumentEntry[]> {
+  const entries = await listDir(DOCUMENTS_DIR);
+  const metadataFiles = entries.filter((entry) => entry.type === "file" && entry.name.endsWith(".json"));
+  const documents = await Promise.all(
+    metadataFiles.map(async (entry) => {
+      const file = await getFile(entry.path);
+      if (!file) return null;
+      return JSON.parse(file.content) as DocumentEntry;
+    })
+  );
+  return documents
+    .filter((document): document is DocumentEntry => document !== null)
+    .sort((a, b) => a.title.localeCompare(b.title));
+}
+
+export async function getDocumentBytes(filename: string): Promise<Buffer | null> {
+  const result = await getFileBytes(`${DOCUMENTS_DIR}/${filename}`);
+  return result?.bytes ?? null;
+}
+
+export async function addDocument(
+  originalName: string,
+  title: string,
+  description: string,
+  postSlug: string,
+  bytes: Buffer
+): Promise<DocumentEntry> {
+  const safeName = originalName.replace(/[^a-zA-Z0-9._-]/g, "_");
+  const filename = `${Date.now()}__${safeName}`;
+  const entry: DocumentEntry = {
+    filename,
+    originalName,
+    title,
+    description,
+    postSlug,
+    size: bytes.length,
+  };
+  await putFileBytes(`${DOCUMENTS_DIR}/${filename}`, bytes, `Add document: ${title}`);
+  await putFile(
+    documentMetadataPath(filename),
+    JSON.stringify(entry, null, 2),
+    `Add document metadata: ${title}`
+  );
+  return entry;
+}
+
+export async function deleteDocument(filename: string): Promise<void> {
+  const pdfPath = `${DOCUMENTS_DIR}/${filename}`;
+  const existingPdf = await getFileBytes(pdfPath);
+  if (existingPdf) await deleteFile(pdfPath, existingPdf.sha, `Remove document: ${filename}`);
+
+  const metadataPath = documentMetadataPath(filename);
+  const existingMetadata = await getFile(metadataPath);
+  if (existingMetadata) {
+    await deleteFile(metadataPath, existingMetadata.sha, `Remove document metadata: ${filename}`);
+  }
+}
+
 // ---- blog posts ----
 
 export type Post = {

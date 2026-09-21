@@ -1,27 +1,43 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useSyncExternalStore } from "react";
+
+type Theme = "dark" | "light";
+
+function getClientTheme(): Theme {
+  const stored = localStorage.getItem("theme");
+  return stored === "light" || stored === "dark"
+    ? stored
+    : window.matchMedia("(prefers-color-scheme: light)").matches
+      ? "light"
+      : "dark";
+}
+
+function subscribe(callback: () => void) {
+  window.addEventListener("theme-change", callback);
+  return () => window.removeEventListener("theme-change", callback);
+}
 
 export default function ThemeToggle() {
-  // Lazy initializer reads the attribute the inline layout script already
-  // set on <html> before hydration — no effect needed, and it matches
-  // what's on the page rather than guessing during SSR.
- const [theme, setTheme] = useState<"dark" | "light" | null>(() => {
-  if (typeof window === "undefined") return null;
-  const stored = localStorage.getItem("theme");
-  const value = stored ?? (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
-  document.documentElement.setAttribute("data-theme", value);
-  return value as "dark" | "light";
-});
+  const theme = useSyncExternalStore(
+    subscribe,
+    getClientTheme,
+    () => null
+  );
+
+  useEffect(() => {
+    if (theme) document.documentElement.setAttribute("data-theme", theme);
+  }, [theme]);
 
   function toggle() {
+    if (!theme) return;
     const next = theme === "light" ? "dark" : "light";
     document.documentElement.setAttribute("data-theme", next);
     localStorage.setItem("theme", next);
-    setTheme(next);
+    window.dispatchEvent(new Event("theme-change"));
   }
 
-  // Avoid rendering the wrong icon before hydration reads the real theme.
+  // Avoid rendering a theme-dependent button until the browser theme is known.
   if (theme === null) {
     return <span className="w-8 h-8 inline-block" aria-hidden="true" />;
   }

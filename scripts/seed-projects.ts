@@ -1,6 +1,6 @@
 // One-time helper to push your original three projects into the GitHub
 // content repo, so /admin isn't starting from empty. Run once after you've
-// set GITHUB_TOKEN / GITHUB_OWNER / GITHUB_REPO in .env.local:
+// set GITHUB_TOKEN / GITHUB_OWNER / GITHUB_REPO in .env or .env.local:
 //
 //   npx tsx scripts/seed-projects.ts
 //
@@ -8,6 +8,7 @@
 
 import { config } from "dotenv";
 config({ path: ".env.local" });
+config({ path: ".env" });
 
 import { getProject, saveProject, type Project } from "../src/lib/content-store";
 

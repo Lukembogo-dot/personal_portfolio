@@ -168,8 +168,12 @@ function verifyToken(token) {
 "use strict";
 
 __turbopack_context__.s([
+    "addDocument",
+    ()=>addDocument,
     "addProjectPdf",
     ()=>addProjectPdf,
+    "deleteDocument",
+    ()=>deleteDocument,
     "deletePost",
     ()=>deletePost,
     "deleteProject",
@@ -178,6 +182,10 @@ __turbopack_context__.s([
     ()=>deleteProjectPdf,
     "getAllProjectPdfs",
     ()=>getAllProjectPdfs,
+    "getDocumentBytes",
+    ()=>getDocumentBytes,
+    "getDocuments",
+    ()=>getDocuments,
     "getPost",
     ()=>getPost,
     "getPosts",
@@ -272,6 +280,49 @@ async function deleteProjectPdf(slug, filename) {
     const existing = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$github$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getFileBytes"])(path);
     if (!existing) return;
     await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$github$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["deleteFile"])(path, existing.sha, `Remove PDF from ${slug}: ${filename}`);
+}
+const DOCUMENTS_DIR = "content/documents";
+function documentMetadataPath(filename) {
+    return `${DOCUMENTS_DIR}/${filename}.json`;
+}
+async function getDocuments() {
+    const entries = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$github$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["listDir"])(DOCUMENTS_DIR);
+    const metadataFiles = entries.filter((entry)=>entry.type === "file" && entry.name.endsWith(".json"));
+    const documents = await Promise.all(metadataFiles.map(async (entry)=>{
+        const file = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$github$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getFile"])(entry.path);
+        if (!file) return null;
+        return JSON.parse(file.content);
+    }));
+    return documents.filter((document)=>document !== null).sort((a, b)=>a.title.localeCompare(b.title));
+}
+async function getDocumentBytes(filename) {
+    const result = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$github$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getFileBytes"])(`${DOCUMENTS_DIR}/${filename}`);
+    return result?.bytes ?? null;
+}
+async function addDocument(originalName, title, description, postSlug, bytes) {
+    const safeName = originalName.replace(/[^a-zA-Z0-9._-]/g, "_");
+    const filename = `${Date.now()}__${safeName}`;
+    const entry = {
+        filename,
+        originalName,
+        title,
+        description,
+        postSlug,
+        size: bytes.length
+    };
+    await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$github$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["putFileBytes"])(`${DOCUMENTS_DIR}/${filename}`, bytes, `Add document: ${title}`);
+    await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$github$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["putFile"])(documentMetadataPath(filename), JSON.stringify(entry, null, 2), `Add document metadata: ${title}`);
+    return entry;
+}
+async function deleteDocument(filename) {
+    const pdfPath = `${DOCUMENTS_DIR}/${filename}`;
+    const existingPdf = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$github$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getFileBytes"])(pdfPath);
+    if (existingPdf) await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$github$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["deleteFile"])(pdfPath, existingPdf.sha, `Remove document: ${filename}`);
+    const metadataPath = documentMetadataPath(filename);
+    const existingMetadata = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$github$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getFile"])(metadataPath);
+    if (existingMetadata) {
+        await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$github$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["deleteFile"])(metadataPath, existingMetadata.sha, `Remove document metadata: ${filename}`);
+    }
 }
 const POSTS_DIR = "content/posts";
 async function getPosts() {
@@ -372,6 +423,25 @@ async function getFileBytes(path) {
     if (res.status === 404) return null;
     if (!res.ok) throw new Error(`GitHub getFileBytes failed (${res.status}): ${await res.text()}`);
     const data = await res.json();
+    if (data.download_url) {
+        const raw = await fetch(`${apiUrl(path)}?ref=${BRANCH}`, {
+            headers: {
+                ...headers(),
+                Accept: "application/vnd.github.raw"
+            },
+            cache: "no-store"
+        });
+        if (!raw.ok) {
+            throw new Error(`GitHub raw file download failed (${raw.status}): ${await raw.text()}`);
+        }
+        return {
+            sha: data.sha,
+            bytes: Buffer.from(await raw.arrayBuffer())
+        };
+    }
+    if (typeof data.content !== "string") {
+        throw new Error("GitHub did not return PDF content or a download URL");
+    }
     return {
         sha: data.sha,
         bytes: Buffer.from(data.content, "base64")

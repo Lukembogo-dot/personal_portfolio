@@ -9,7 +9,7 @@ __turbopack_context__.s([
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/jsx-dev-runtime.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
 ;
-var _s = __turbopack_context__.k.signature(), _s1 = __turbopack_context__.k.signature(), _s2 = __turbopack_context__.k.signature();
+var _s = __turbopack_context__.k.signature(), _s1 = __turbopack_context__.k.signature(), _s2 = __turbopack_context__.k.signature(), _s3 = __turbopack_context__.k.signature();
 "use client";
 ;
 const inputClass = "w-full bg-transparent border border-[var(--line)] rounded px-3 py-2 text-sm";
@@ -26,6 +26,227 @@ function emptyProject() {
         notes: []
     };
 }
+function DocumentsManager({ documents, posts, onUpload, onRemove }) {
+    _s();
+    const [title, setTitle] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("");
+    const [description, setDescription] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("");
+    const [postSlug, setPostSlug] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("");
+    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+        className: "flex flex-col gap-8",
+        children: [
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
+                className: "border border-[var(--line)] rounded-lg p-5 flex flex-col gap-4",
+                onSubmit: (event)=>{
+                    event.preventDefault();
+                    const input = event.currentTarget.elements.namedItem("file");
+                    if (!(input instanceof HTMLInputElement) || !input.files?.[0] || !title.trim()) return;
+                    const form = new FormData();
+                    form.set("file", input.files[0]);
+                    form.set("title", title.trim());
+                    form.set("description", description.trim());
+                    form.set("postSlug", postSlug);
+                    onUpload(form);
+                    setTitle("");
+                    setDescription("");
+                    setPostSlug("");
+                    input.value = "";
+                },
+                children: [
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        children: [
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
+                                className: labelClass,
+                                children: "Title"
+                            }, void 0, false, {
+                                fileName: "[project]/src/app/admin/AdminDashboard.tsx",
+                                lineNumber: 55,
+                                columnNumber: 11
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                required: true,
+                                value: title,
+                                onChange: (event)=>setTitle(event.target.value),
+                                className: inputClass
+                            }, void 0, false, {
+                                fileName: "[project]/src/app/admin/AdminDashboard.tsx",
+                                lineNumber: 56,
+                                columnNumber: 11
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/src/app/admin/AdminDashboard.tsx",
+                        lineNumber: 54,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        children: [
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
+                                className: labelClass,
+                                children: "Description"
+                            }, void 0, false, {
+                                fileName: "[project]/src/app/admin/AdminDashboard.tsx",
+                                lineNumber: 59,
+                                columnNumber: 11
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
+                                value: description,
+                                onChange: (event)=>setDescription(event.target.value),
+                                className: inputClass,
+                                rows: 3
+                            }, void 0, false, {
+                                fileName: "[project]/src/app/admin/AdminDashboard.tsx",
+                                lineNumber: 60,
+                                columnNumber: 11
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/src/app/admin/AdminDashboard.tsx",
+                        lineNumber: 58,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        children: [
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
+                                className: labelClass,
+                                children: "Link to a post (optional)"
+                            }, void 0, false, {
+                                fileName: "[project]/src/app/admin/AdminDashboard.tsx",
+                                lineNumber: 63,
+                                columnNumber: 11
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
+                                value: postSlug,
+                                onChange: (event)=>setPostSlug(event.target.value),
+                                className: inputClass,
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
+                                        value: "",
+                                        children: "No post"
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/app/admin/AdminDashboard.tsx",
+                                        lineNumber: 65,
+                                        columnNumber: 13
+                                    }, this),
+                                    posts.map((post)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
+                                            value: post.slug,
+                                            children: post.title
+                                        }, post.slug, false, {
+                                            fileName: "[project]/src/app/admin/AdminDashboard.tsx",
+                                            lineNumber: 66,
+                                            columnNumber: 34
+                                        }, this))
+                                ]
+                            }, void 0, true, {
+                                fileName: "[project]/src/app/admin/AdminDashboard.tsx",
+                                lineNumber: 64,
+                                columnNumber: 11
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/src/app/admin/AdminDashboard.tsx",
+                        lineNumber: 62,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                        name: "file",
+                        type: "file",
+                        accept: "application/pdf",
+                        required: true,
+                        className: "text-sm"
+                    }, void 0, false, {
+                        fileName: "[project]/src/app/admin/AdminDashboard.tsx",
+                        lineNumber: 69,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                        type: "submit",
+                        className: `self-start ${buttonClass}`,
+                        children: "Upload document"
+                    }, void 0, false, {
+                        fileName: "[project]/src/app/admin/AdminDashboard.tsx",
+                        lineNumber: 70,
+                        columnNumber: 9
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "[project]/src/app/admin/AdminDashboard.tsx",
+                lineNumber: 36,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                className: "flex flex-col gap-3",
+                children: [
+                    documents.map((document)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                            className: "border border-[var(--line)] rounded-lg p-4 flex items-center justify-between gap-4",
+                            children: [
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                    children: [
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
+                                            href: `/api/documents/${encodeURIComponent(document.filename)}`,
+                                            target: "_blank",
+                                            rel: "noopener noreferrer",
+                                            className: "text-[var(--accent)]",
+                                            children: document.title
+                                        }, void 0, false, {
+                                            fileName: "[project]/src/app/admin/AdminDashboard.tsx",
+                                            lineNumber: 77,
+                                            columnNumber: 15
+                                        }, this),
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                            className: "text-sm text-[var(--fg-dim)]",
+                                            children: [
+                                                document.originalName,
+                                                document.postSlug ? ` · linked to ${posts.find((post)=>post.slug === document.postSlug)?.title ?? document.postSlug}` : ""
+                                            ]
+                                        }, void 0, true, {
+                                            fileName: "[project]/src/app/admin/AdminDashboard.tsx",
+                                            lineNumber: 80,
+                                            columnNumber: 15
+                                        }, this)
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "[project]/src/app/admin/AdminDashboard.tsx",
+                                    lineNumber: 76,
+                                    columnNumber: 13
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                    onClick: ()=>onRemove(document.filename),
+                                    className: "text-sm text-[var(--fg-dim)] hover:text-red-400",
+                                    children: "Remove"
+                                }, void 0, false, {
+                                    fileName: "[project]/src/app/admin/AdminDashboard.tsx",
+                                    lineNumber: 82,
+                                    columnNumber: 13
+                                }, this)
+                            ]
+                        }, document.filename, true, {
+                            fileName: "[project]/src/app/admin/AdminDashboard.tsx",
+                            lineNumber: 75,
+                            columnNumber: 11
+                        }, this)),
+                    documents.length === 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                        className: "text-sm text-[var(--fg-dim)]",
+                        children: "No standalone documents."
+                    }, void 0, false, {
+                        fileName: "[project]/src/app/admin/AdminDashboard.tsx",
+                        lineNumber: 85,
+                        columnNumber: 36
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "[project]/src/app/admin/AdminDashboard.tsx",
+                lineNumber: 73,
+                columnNumber: 7
+            }, this)
+        ]
+    }, void 0, true, {
+        fileName: "[project]/src/app/admin/AdminDashboard.tsx",
+        lineNumber: 35,
+        columnNumber: 5
+    }, this);
+}
+_s(DocumentsManager, "yq3JuX0ilNoqAQIjBdLsuUiVENA=");
+_c = DocumentsManager;
 function emptyPost() {
     return {
         slug: "",
@@ -35,12 +256,13 @@ function emptyPost() {
         body: ""
     };
 }
-function AdminDashboard({ initialProjects, initialPosts, initialPdfs }) {
-    _s();
+function AdminDashboard({ initialProjects, initialPosts, initialPdfs, initialDocuments }) {
+    _s1();
     const [tab, setTab] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("projects");
     const [projects, setProjects] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(initialProjects);
     const [posts, setPosts] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(initialPosts);
     const [pdfs, setPdfs] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(initialPdfs);
+    const [documents, setDocuments] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(initialDocuments);
     const [editingProject, setEditingProject] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
     const [editingPost, setEditingPost] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
     const [error, setError] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("");
@@ -125,6 +347,34 @@ function AdminDashboard({ initialProjects, initialPosts, initialPdfs }) {
                 }));
         }
     }
+    async function uploadDocument(form) {
+        setError("");
+        const res = await fetch("/api/admin/documents", {
+            method: "POST",
+            body: form
+        });
+        const data = await res.json();
+        if (!res.ok) {
+            setError(data.error ?? "Upload failed.");
+            return;
+        }
+        setDocuments((prev)=>[
+                ...prev,
+                data.entry
+            ].sort((a, b)=>a.title.localeCompare(b.title)));
+    }
+    async function removeDocument(filename) {
+        const res = await fetch("/api/admin/documents", {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                filename
+            })
+        });
+        if (res.ok) setDocuments((prev)=>prev.filter((document)=>document.filename !== filename));
+    }
     // ---- posts ----
     async function savePost(post, isNew) {
         setError("");
@@ -165,6 +415,7 @@ function AdminDashboard({ initialProjects, initialPosts, initialPdfs }) {
                 className: "flex gap-2 border-b border-[var(--line)]",
                 children: [
                     "projects",
+                    "documents",
                     "posts"
                 ].map((t)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                         onClick: ()=>{
@@ -177,12 +428,12 @@ function AdminDashboard({ initialProjects, initialPosts, initialPdfs }) {
                         children: t
                     }, t, false, {
                         fileName: "[project]/src/app/admin/AdminDashboard.tsx",
-                        lineNumber: 153,
+                        lineNumber: 248,
                         columnNumber: 11
                     }, this))
             }, void 0, false, {
                 fileName: "[project]/src/app/admin/AdminDashboard.tsx",
-                lineNumber: 151,
+                lineNumber: 246,
                 columnNumber: 7
             }, this),
             error && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -190,7 +441,7 @@ function AdminDashboard({ initialProjects, initialPosts, initialPdfs }) {
                 children: error
             }, void 0, false, {
                 fileName: "[project]/src/app/admin/AdminDashboard.tsx",
-                lineNumber: 172,
+                lineNumber: 267,
                 columnNumber: 17
             }, this),
             tab === "projects" ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -203,7 +454,7 @@ function AdminDashboard({ initialProjects, initialPosts, initialPdfs }) {
                         onSave: (p)=>saveProject(p, !projects.some((x)=>x.slug === p.slug))
                     }, void 0, false, {
                         fileName: "[project]/src/app/admin/AdminDashboard.tsx",
-                        lineNumber: 177,
+                        lineNumber: 272,
                         columnNumber: 13
                     }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                         onClick: ()=>setEditingProject(emptyProject()),
@@ -211,7 +462,7 @@ function AdminDashboard({ initialProjects, initialPosts, initialPdfs }) {
                         children: "+ New project"
                     }, void 0, false, {
                         fileName: "[project]/src/app/admin/AdminDashboard.tsx",
-                        lineNumber: 184,
+                        lineNumber: 279,
                         columnNumber: 13
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -229,7 +480,7 @@ function AdminDashboard({ initialProjects, initialPosts, initialPdfs }) {
                                                         children: project.name
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/admin/AdminDashboard.tsx",
-                                                        lineNumber: 197,
+                                                        lineNumber: 292,
                                                         columnNumber: 21
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -237,13 +488,13 @@ function AdminDashboard({ initialProjects, initialPosts, initialPdfs }) {
                                                         children: project.role
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/admin/AdminDashboard.tsx",
-                                                        lineNumber: 200,
+                                                        lineNumber: 295,
                                                         columnNumber: 21
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/app/admin/AdminDashboard.tsx",
-                                                lineNumber: 196,
+                                                lineNumber: 291,
                                                 columnNumber: 19
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -255,7 +506,7 @@ function AdminDashboard({ initialProjects, initialPosts, initialPdfs }) {
                                                         children: "Edit"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/admin/AdminDashboard.tsx",
-                                                        lineNumber: 203,
+                                                        lineNumber: 298,
                                                         columnNumber: 21
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -264,19 +515,19 @@ function AdminDashboard({ initialProjects, initialPosts, initialPdfs }) {
                                                         children: "Delete"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/admin/AdminDashboard.tsx",
-                                                        lineNumber: 209,
+                                                        lineNumber: 304,
                                                         columnNumber: 21
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/app/admin/AdminDashboard.tsx",
-                                                lineNumber: 202,
+                                                lineNumber: 297,
                                                 columnNumber: 19
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/admin/AdminDashboard.tsx",
-                                        lineNumber: 195,
+                                        lineNumber: 290,
                                         columnNumber: 17
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -287,7 +538,7 @@ function AdminDashboard({ initialProjects, initialPosts, initialPdfs }) {
                                                 children: "Documents"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/admin/AdminDashboard.tsx",
-                                                lineNumber: 219,
+                                                lineNumber: 314,
                                                 columnNumber: 19
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("ul", {
@@ -304,7 +555,7 @@ function AdminDashboard({ initialProjects, initialPosts, initialPdfs }) {
                                                                     children: pdf.originalName
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/src/app/admin/AdminDashboard.tsx",
-                                                                    lineNumber: 226,
+                                                                    lineNumber: 321,
                                                                     columnNumber: 25
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -313,13 +564,13 @@ function AdminDashboard({ initialProjects, initialPosts, initialPdfs }) {
                                                                     children: "Remove"
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/src/app/admin/AdminDashboard.tsx",
-                                                                    lineNumber: 234,
+                                                                    lineNumber: 329,
                                                                     columnNumber: 25
                                                                 }, this)
                                                             ]
                                                         }, pdf.filename, true, {
                                                             fileName: "[project]/src/app/admin/AdminDashboard.tsx",
-                                                            lineNumber: 222,
+                                                            lineNumber: 317,
                                                             columnNumber: 23
                                                         }, this)),
                                                     (pdfs[project.slug] ?? []).length === 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
@@ -327,13 +578,13 @@ function AdminDashboard({ initialProjects, initialPosts, initialPdfs }) {
                                                         children: "No documents."
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/admin/AdminDashboard.tsx",
-                                                        lineNumber: 243,
+                                                        lineNumber: 338,
                                                         columnNumber: 23
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/app/admin/AdminDashboard.tsx",
-                                                lineNumber: 220,
+                                                lineNumber: 315,
                                                 columnNumber: 19
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -347,30 +598,39 @@ function AdminDashboard({ initialProjects, initialPosts, initialPdfs }) {
                                                 className: "text-sm"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/admin/AdminDashboard.tsx",
-                                                lineNumber: 246,
+                                                lineNumber: 341,
                                                 columnNumber: 19
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/admin/AdminDashboard.tsx",
-                                        lineNumber: 218,
+                                        lineNumber: 313,
                                         columnNumber: 17
                                     }, this)
                                 ]
                             }, project.slug, true, {
                                 fileName: "[project]/src/app/admin/AdminDashboard.tsx",
-                                lineNumber: 194,
+                                lineNumber: 289,
                                 columnNumber: 15
                             }, this))
                     }, void 0, false, {
                         fileName: "[project]/src/app/admin/AdminDashboard.tsx",
-                        lineNumber: 192,
+                        lineNumber: 287,
                         columnNumber: 11
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/admin/AdminDashboard.tsx",
-                lineNumber: 175,
+                lineNumber: 270,
+                columnNumber: 9
+            }, this) : tab === "documents" ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(DocumentsManager, {
+                documents: documents,
+                posts: posts,
+                onUpload: uploadDocument,
+                onRemove: removeDocument
+            }, void 0, false, {
+                fileName: "[project]/src/app/admin/AdminDashboard.tsx",
+                lineNumber: 357,
                 columnNumber: 9
             }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "flex flex-col gap-8",
@@ -382,7 +642,7 @@ function AdminDashboard({ initialProjects, initialPosts, initialPdfs }) {
                         onSave: (p)=>savePost(p, !posts.some((x)=>x.slug === p.slug))
                     }, void 0, false, {
                         fileName: "[project]/src/app/admin/AdminDashboard.tsx",
-                        lineNumber: 264,
+                        lineNumber: 366,
                         columnNumber: 13
                     }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                         onClick: ()=>setEditingPost(emptyPost()),
@@ -390,7 +650,7 @@ function AdminDashboard({ initialProjects, initialPosts, initialPdfs }) {
                         children: "+ New post"
                     }, void 0, false, {
                         fileName: "[project]/src/app/admin/AdminDashboard.tsx",
-                        lineNumber: 271,
+                        lineNumber: 373,
                         columnNumber: 13
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -405,7 +665,7 @@ function AdminDashboard({ initialProjects, initialPosts, initialPdfs }) {
                                                 children: post.date
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/admin/AdminDashboard.tsx",
-                                                lineNumber: 286,
+                                                lineNumber: 388,
                                                 columnNumber: 19
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
@@ -413,13 +673,13 @@ function AdminDashboard({ initialProjects, initialPosts, initialPdfs }) {
                                                 children: post.title
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/admin/AdminDashboard.tsx",
-                                                lineNumber: 287,
+                                                lineNumber: 389,
                                                 columnNumber: 19
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/admin/AdminDashboard.tsx",
-                                        lineNumber: 285,
+                                        lineNumber: 387,
                                         columnNumber: 17
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -431,7 +691,7 @@ function AdminDashboard({ initialProjects, initialPosts, initialPdfs }) {
                                                 children: "Edit"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/admin/AdminDashboard.tsx",
-                                                lineNumber: 292,
+                                                lineNumber: 394,
                                                 columnNumber: 19
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -440,43 +700,43 @@ function AdminDashboard({ initialProjects, initialPosts, initialPdfs }) {
                                                 children: "Delete"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/admin/AdminDashboard.tsx",
-                                                lineNumber: 298,
+                                                lineNumber: 400,
                                                 columnNumber: 19
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/admin/AdminDashboard.tsx",
-                                        lineNumber: 291,
+                                        lineNumber: 393,
                                         columnNumber: 17
                                     }, this)
                                 ]
                             }, post.slug, true, {
                                 fileName: "[project]/src/app/admin/AdminDashboard.tsx",
-                                lineNumber: 281,
+                                lineNumber: 383,
                                 columnNumber: 15
                             }, this))
                     }, void 0, false, {
                         fileName: "[project]/src/app/admin/AdminDashboard.tsx",
-                        lineNumber: 279,
+                        lineNumber: 381,
                         columnNumber: 11
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/admin/AdminDashboard.tsx",
-                lineNumber: 262,
+                lineNumber: 364,
                 columnNumber: 9
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/app/admin/AdminDashboard.tsx",
-        lineNumber: 150,
+        lineNumber: 245,
         columnNumber: 5
     }, this);
 }
-_s(AdminDashboard, "5T1Ht6VCq+RHsMOKnS/wh1E78l8=");
-_c = AdminDashboard;
+_s1(AdminDashboard, "m59+G9rJKphJU55Of08WxdCsB8Q=");
+_c1 = AdminDashboard;
 function ProjectForm({ project, busy, onSave, onCancel }) {
-    _s1();
+    _s2();
     const [form, setForm] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(project);
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
         onSubmit: (e)=>{
@@ -492,7 +752,7 @@ function ProjectForm({ project, busy, onSave, onCancel }) {
                         children: "Name"
                     }, void 0, false, {
                         fileName: "[project]/src/app/admin/AdminDashboard.tsx",
-                        lineNumber: 336,
+                        lineNumber: 438,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -505,13 +765,13 @@ function ProjectForm({ project, busy, onSave, onCancel }) {
                         className: inputClass
                     }, void 0, false, {
                         fileName: "[project]/src/app/admin/AdminDashboard.tsx",
-                        lineNumber: 337,
+                        lineNumber: 439,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/admin/AdminDashboard.tsx",
-                lineNumber: 335,
+                lineNumber: 437,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -521,7 +781,7 @@ function ProjectForm({ project, busy, onSave, onCancel }) {
                         children: "Role / one-liner"
                     }, void 0, false, {
                         fileName: "[project]/src/app/admin/AdminDashboard.tsx",
-                        lineNumber: 345,
+                        lineNumber: 447,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -533,13 +793,13 @@ function ProjectForm({ project, busy, onSave, onCancel }) {
                         className: inputClass
                     }, void 0, false, {
                         fileName: "[project]/src/app/admin/AdminDashboard.tsx",
-                        lineNumber: 346,
+                        lineNumber: 448,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/admin/AdminDashboard.tsx",
-                lineNumber: 344,
+                lineNumber: 446,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -549,7 +809,7 @@ function ProjectForm({ project, busy, onSave, onCancel }) {
                         children: "Description"
                     }, void 0, false, {
                         fileName: "[project]/src/app/admin/AdminDashboard.tsx",
-                        lineNumber: 353,
+                        lineNumber: 455,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
@@ -562,13 +822,13 @@ function ProjectForm({ project, busy, onSave, onCancel }) {
                         className: inputClass
                     }, void 0, false, {
                         fileName: "[project]/src/app/admin/AdminDashboard.tsx",
-                        lineNumber: 354,
+                        lineNumber: 456,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/admin/AdminDashboard.tsx",
-                lineNumber: 352,
+                lineNumber: 454,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -578,7 +838,7 @@ function ProjectForm({ project, busy, onSave, onCancel }) {
                         children: "Stack (comma-separated)"
                     }, void 0, false, {
                         fileName: "[project]/src/app/admin/AdminDashboard.tsx",
-                        lineNumber: 362,
+                        lineNumber: 464,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -590,13 +850,13 @@ function ProjectForm({ project, busy, onSave, onCancel }) {
                         className: inputClass
                     }, void 0, false, {
                         fileName: "[project]/src/app/admin/AdminDashboard.tsx",
-                        lineNumber: 363,
+                        lineNumber: 465,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/admin/AdminDashboard.tsx",
-                lineNumber: 361,
+                lineNumber: 463,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -606,7 +866,7 @@ function ProjectForm({ project, busy, onSave, onCancel }) {
                         children: "Notes (one per line)"
                     }, void 0, false, {
                         fileName: "[project]/src/app/admin/AdminDashboard.tsx",
-                        lineNumber: 375,
+                        lineNumber: 477,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
@@ -619,13 +879,13 @@ function ProjectForm({ project, busy, onSave, onCancel }) {
                         className: inputClass
                     }, void 0, false, {
                         fileName: "[project]/src/app/admin/AdminDashboard.tsx",
-                        lineNumber: 376,
+                        lineNumber: 478,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/admin/AdminDashboard.tsx",
-                lineNumber: 374,
+                lineNumber: 476,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -638,7 +898,7 @@ function ProjectForm({ project, busy, onSave, onCancel }) {
                         children: busy ? "Saving…" : "Save"
                     }, void 0, false, {
                         fileName: "[project]/src/app/admin/AdminDashboard.tsx",
-                        lineNumber: 389,
+                        lineNumber: 491,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -648,26 +908,26 @@ function ProjectForm({ project, busy, onSave, onCancel }) {
                         children: "Cancel"
                     }, void 0, false, {
                         fileName: "[project]/src/app/admin/AdminDashboard.tsx",
-                        lineNumber: 392,
+                        lineNumber: 494,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/admin/AdminDashboard.tsx",
-                lineNumber: 388,
+                lineNumber: 490,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/app/admin/AdminDashboard.tsx",
-        lineNumber: 328,
+        lineNumber: 430,
         columnNumber: 5
     }, this);
 }
-_s1(ProjectForm, "tZTSxugeodPftpeXT3PldQD7drY=");
-_c1 = ProjectForm;
+_s2(ProjectForm, "tZTSxugeodPftpeXT3PldQD7drY=");
+_c2 = ProjectForm;
 function PostForm({ post, busy, onSave, onCancel }) {
-    _s2();
+    _s3();
     const [form, setForm] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(post);
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
         onSubmit: (e)=>{
@@ -683,7 +943,7 @@ function PostForm({ post, busy, onSave, onCancel }) {
                         children: "Title"
                     }, void 0, false, {
                         fileName: "[project]/src/app/admin/AdminDashboard.tsx",
-                        lineNumber: 426,
+                        lineNumber: 528,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -696,13 +956,13 @@ function PostForm({ post, busy, onSave, onCancel }) {
                         className: inputClass
                     }, void 0, false, {
                         fileName: "[project]/src/app/admin/AdminDashboard.tsx",
-                        lineNumber: 427,
+                        lineNumber: 529,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/admin/AdminDashboard.tsx",
-                lineNumber: 425,
+                lineNumber: 527,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -712,7 +972,7 @@ function PostForm({ post, busy, onSave, onCancel }) {
                         children: "Date"
                     }, void 0, false, {
                         fileName: "[project]/src/app/admin/AdminDashboard.tsx",
-                        lineNumber: 435,
+                        lineNumber: 537,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -725,13 +985,13 @@ function PostForm({ post, busy, onSave, onCancel }) {
                         className: inputClass
                     }, void 0, false, {
                         fileName: "[project]/src/app/admin/AdminDashboard.tsx",
-                        lineNumber: 436,
+                        lineNumber: 538,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/admin/AdminDashboard.tsx",
-                lineNumber: 434,
+                lineNumber: 536,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -741,7 +1001,7 @@ function PostForm({ post, busy, onSave, onCancel }) {
                         children: "Excerpt"
                     }, void 0, false, {
                         fileName: "[project]/src/app/admin/AdminDashboard.tsx",
-                        lineNumber: 444,
+                        lineNumber: 546,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -753,13 +1013,13 @@ function PostForm({ post, busy, onSave, onCancel }) {
                         className: inputClass
                     }, void 0, false, {
                         fileName: "[project]/src/app/admin/AdminDashboard.tsx",
-                        lineNumber: 445,
+                        lineNumber: 547,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/admin/AdminDashboard.tsx",
-                lineNumber: 443,
+                lineNumber: 545,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -769,7 +1029,7 @@ function PostForm({ post, busy, onSave, onCancel }) {
                         children: "Body (Markdown)"
                     }, void 0, false, {
                         fileName: "[project]/src/app/admin/AdminDashboard.tsx",
-                        lineNumber: 452,
+                        lineNumber: 554,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
@@ -782,13 +1042,13 @@ function PostForm({ post, busy, onSave, onCancel }) {
                         className: `${inputClass} font-mono`
                     }, void 0, false, {
                         fileName: "[project]/src/app/admin/AdminDashboard.tsx",
-                        lineNumber: 453,
+                        lineNumber: 555,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/admin/AdminDashboard.tsx",
-                lineNumber: 451,
+                lineNumber: 553,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -801,7 +1061,7 @@ function PostForm({ post, busy, onSave, onCancel }) {
                         children: busy ? "Saving…" : "Save"
                     }, void 0, false, {
                         fileName: "[project]/src/app/admin/AdminDashboard.tsx",
-                        lineNumber: 461,
+                        lineNumber: 563,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -811,28 +1071,29 @@ function PostForm({ post, busy, onSave, onCancel }) {
                         children: "Cancel"
                     }, void 0, false, {
                         fileName: "[project]/src/app/admin/AdminDashboard.tsx",
-                        lineNumber: 464,
+                        lineNumber: 566,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/admin/AdminDashboard.tsx",
-                lineNumber: 460,
+                lineNumber: 562,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/app/admin/AdminDashboard.tsx",
-        lineNumber: 418,
+        lineNumber: 520,
         columnNumber: 5
     }, this);
 }
-_s2(PostForm, "jShoMx1Ou/id3OrmD5DO58R4xyw=");
-_c2 = PostForm;
-var _c, _c1, _c2;
-__turbopack_context__.k.register(_c, "AdminDashboard");
-__turbopack_context__.k.register(_c1, "ProjectForm");
-__turbopack_context__.k.register(_c2, "PostForm");
+_s3(PostForm, "jShoMx1Ou/id3OrmD5DO58R4xyw=");
+_c3 = PostForm;
+var _c, _c1, _c2, _c3;
+__turbopack_context__.k.register(_c, "DocumentsManager");
+__turbopack_context__.k.register(_c1, "AdminDashboard");
+__turbopack_context__.k.register(_c2, "ProjectForm");
+__turbopack_context__.k.register(_c3, "PostForm");
 if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
     __turbopack_context__.k.registerExports(__turbopack_context__.m, globalThis.$RefreshHelpers$);
 }

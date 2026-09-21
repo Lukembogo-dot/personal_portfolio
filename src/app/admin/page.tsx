@@ -1,6 +1,13 @@
 import { cookies } from "next/headers";
 import { verifyToken } from "@/lib/auth";
-import { getProjectPdfs, getProjects, getPosts, type PdfEntry } from "@/lib/content-store";
+import {
+  getDocuments,
+  getProjectPdfs,
+  getProjects,
+  getPosts,
+  type DocumentEntry,
+  type PdfEntry,
+} from "@/lib/content-store";
 import AdminDashboard from "./AdminDashboard";
 
 export const dynamic = "force-dynamic";
@@ -48,11 +55,13 @@ export default async function AdminPage({
   let projects: Awaited<ReturnType<typeof getProjects>> = [];
   let posts: Awaited<ReturnType<typeof getPosts>> = [];
   let pdfs: Record<string, PdfEntry[]> = {};
+  let documents: DocumentEntry[] = [];
   let loadError = "";
 
   try {
     projects = await getProjects();
     posts = await getPosts();
+    documents = await getDocuments();
     const pdfLists = await Promise.all(
       projects.map(async (p) => [p.slug, await getProjectPdfs(p.slug)] as const)
     );
@@ -81,7 +90,12 @@ export default async function AdminPage({
           GITHUB_OWNER, and GITHUB_REPO in .env.local.
         </p>
       ) : (
-        <AdminDashboard initialProjects={projects} initialPosts={posts} initialPdfs={pdfs} />
+        <AdminDashboard
+          initialProjects={projects}
+          initialPosts={posts}
+          initialPdfs={pdfs}
+          initialDocuments={documents}
+        />
       )}
     </div>
   );

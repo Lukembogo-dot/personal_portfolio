@@ -2615,35 +2615,41 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist
 var _s = __turbopack_context__.k.signature();
 "use client";
 ;
+function getClientTheme() {
+    const stored = localStorage.getItem("theme");
+    return stored === "light" || stored === "dark" ? stored : window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+}
+function subscribe(callback) {
+    window.addEventListener("theme-change", callback);
+    return ()=>window.removeEventListener("theme-change", callback);
+}
 function ThemeToggle() {
     _s();
-    // Lazy initializer reads the attribute the inline layout script already
-    // set on <html> before hydration — no effect needed, and it matches
-    // what's on the page rather than guessing during SSR.
-    const [theme, setTheme] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])({
-        "ThemeToggle.useState": ()=>{
-            if ("TURBOPACK compile-time falsy", 0) //TURBOPACK unreachable
-            ;
-            const stored = localStorage.getItem("theme");
-            const value = stored ?? (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
-            document.documentElement.setAttribute("data-theme", value);
-            return value;
+    const theme = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useSyncExternalStore"])(subscribe, getClientTheme, {
+        "ThemeToggle.useSyncExternalStore[theme]": ()=>null
+    }["ThemeToggle.useSyncExternalStore[theme]"]);
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
+        "ThemeToggle.useEffect": ()=>{
+            if (theme) document.documentElement.setAttribute("data-theme", theme);
         }
-    }["ThemeToggle.useState"]);
+    }["ThemeToggle.useEffect"], [
+        theme
+    ]);
     function toggle() {
+        if (!theme) return;
         const next = theme === "light" ? "dark" : "light";
         document.documentElement.setAttribute("data-theme", next);
         localStorage.setItem("theme", next);
-        setTheme(next);
+        window.dispatchEvent(new Event("theme-change"));
     }
-    // Avoid rendering the wrong icon before hydration reads the real theme.
+    // Avoid rendering a theme-dependent button until the browser theme is known.
     if (theme === null) {
         return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
             className: "w-8 h-8 inline-block",
             "aria-hidden": "true"
         }, void 0, false, {
             fileName: "[project]/src/components/ThemeToggle.tsx",
-            lineNumber: 26,
+            lineNumber: 42,
             columnNumber: 12
         }, this);
     }
@@ -2662,12 +2668,12 @@ function ThemeToggle() {
                 d: "M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"
             }, void 0, false, {
                 fileName: "[project]/src/components/ThemeToggle.tsx",
-                lineNumber: 37,
+                lineNumber: 53,
                 columnNumber: 11
             }, this)
         }, void 0, false, {
             fileName: "[project]/src/components/ThemeToggle.tsx",
-            lineNumber: 36,
+            lineNumber: 52,
             columnNumber: 9
         }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
             width: "16",
@@ -2683,29 +2689,33 @@ function ThemeToggle() {
                     r: "4"
                 }, void 0, false, {
                     fileName: "[project]/src/components/ThemeToggle.tsx",
-                    lineNumber: 41,
+                    lineNumber: 57,
                     columnNumber: 11
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
                     d: "M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"
                 }, void 0, false, {
                     fileName: "[project]/src/components/ThemeToggle.tsx",
-                    lineNumber: 42,
+                    lineNumber: 58,
                     columnNumber: 11
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/src/components/ThemeToggle.tsx",
-            lineNumber: 40,
+            lineNumber: 56,
             columnNumber: 9
         }, this)
     }, void 0, false, {
         fileName: "[project]/src/components/ThemeToggle.tsx",
-        lineNumber: 30,
+        lineNumber: 46,
         columnNumber: 5
     }, this);
 }
-_s(ThemeToggle, "RBZ9jmW12GFekgZcY9YAkLPoPKU=");
+_s(ThemeToggle, "yoyGBWagtKfudaXd+RsiXGMu4S0=", false, function() {
+    return [
+        __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useSyncExternalStore"]
+    ];
+});
 _c = ThemeToggle;
 var _c;
 __turbopack_context__.k.register(_c, "ThemeToggle");

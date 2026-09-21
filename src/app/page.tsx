@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { getProjects } from "@/lib/content-store";
+import Marquee from "@/components/Marquee";
 
 export const dynamic = "force-dynamic";
 
@@ -11,16 +12,15 @@ export default async function Home() {
     <div className="max-w-5xl mx-auto">
       <section className="px-6 lg:px-16 pt-16 pb-20">
         <p className="text-sm text-[var(--accent)] mb-4">
-          Full-stack developer — Nairobi, Kenya
+          IT Professional | Software, Cloud and Network Infrastructure, Cybersecurity, QA & Technology — Nairobi, Kenya
         </p>
         <h1 className="font-[family-name:var(--font-display)] text-[2.25rem] leading-[1.15] lg:text-[3rem] max-w-3xl">
-          I build software that runs real operations — pharmacies, farms, and
-          the systems behind them.
+          I solve IT problems wherever they sit — infrastructure, quality, or the code itself.
         </h1>
         <p className="mt-6 text-lg text-[var(--fg-dim)] max-w-[56ch]">
-          Business IT graduate working across backend development, QA, and
-          data engineering. I care less about demos and more about software
-          that has to keep working after launch.
+          Business IT graduate with hands-on experience across ICT administration, QA/testing, 
+          backend development, and data engineering. I&apos;ve built and shipped platforms end to end, 
+          from multi-tenant SaaS to data pipelines, not just one layer of them.
         </p>
         <div className="mt-8 flex gap-4 text-sm">
           <Link
@@ -37,6 +37,16 @@ export default async function Home() {
           </Link>
         </div>
       </section>
+
+      <Marquee
+        items={[
+          "IT PROFESSIONAL",
+          "QA & TESTING",
+          "BACKEND DEVELOPMENT",
+          "DATA ENGINEERING",
+          "NAIROBI, KENYA",
+        ]}
+      />
 
       {featured.length > 0 && (
         <section className="px-6 lg:px-16 py-16 border-t border-[var(--line)]">

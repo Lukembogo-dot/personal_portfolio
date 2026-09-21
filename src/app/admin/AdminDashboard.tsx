@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import type { PdfEntry, Post, Project } from "@/lib/content-store";
+import type { DocumentEntry, PdfEntry, Post, Project } from "@/lib/content-store";
 
-type Tab = "projects" | "posts";
+type Tab = "projects" | "documents" | "posts";
 
 const inputClass =
   "w-full bg-transparent border border-[var(--line)] rounded px-3 py-2 text-sm";
@@ -15,6 +15,78 @@ function emptyProject(): Project {
   return { slug: "", order: Date.now(), name: "", role: "", blurb: "", stack: [], notes: [] };
 }
 
+
+function DocumentsManager({
+  documents,
+  posts,
+  onUpload,
+  onRemove,
+}: {
+  documents: DocumentEntry[];
+  posts: Post[];
+  onUpload: (form: FormData) => void;
+  onRemove: (filename: string) => void;
+}) {
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [postSlug, setPostSlug] = useState("");
+
+  return (
+    <div className="flex flex-col gap-8">
+      <form
+        className="border border-[var(--line)] rounded-lg p-5 flex flex-col gap-4"
+        onSubmit={(event) => {
+          event.preventDefault();
+          const input = event.currentTarget.elements.namedItem("file");
+          if (!(input instanceof HTMLInputElement) || !input.files?.[0] || !title.trim()) return;
+          const form = new FormData();
+          form.set("file", input.files[0]);
+          form.set("title", title.trim());
+          form.set("description", description.trim());
+          form.set("postSlug", postSlug);
+          onUpload(form);
+          setTitle("");
+          setDescription("");
+          setPostSlug("");
+          input.value = "";
+        }}
+      >
+        <div>
+          <label className={labelClass}>Title</label>
+          <input required value={title} onChange={(event) => setTitle(event.target.value)} className={inputClass} />
+        </div>
+        <div>
+          <label className={labelClass}>Description</label>
+          <textarea value={description} onChange={(event) => setDescription(event.target.value)} className={inputClass} rows={3} />
+        </div>
+        <div>
+          <label className={labelClass}>Link to a post (optional)</label>
+          <select value={postSlug} onChange={(event) => setPostSlug(event.target.value)} className={inputClass}>
+            <option value="">No post</option>
+            {posts.map((post) => <option key={post.slug} value={post.slug}>{post.title}</option>)}
+          </select>
+        </div>
+        <input name="file" type="file" accept="application/pdf" required className="text-sm" />
+        <button type="submit" className={`self-start ${buttonClass}`}>Upload document</button>
+      </form>
+
+      <div className="flex flex-col gap-3">
+        {documents.map((document) => (
+          <div key={document.filename} className="border border-[var(--line)] rounded-lg p-4 flex items-center justify-between gap-4">
+            <div>
+              <a href={`/api/documents/${encodeURIComponent(document.filename)}`} target="_blank" rel="noopener noreferrer" className="text-[var(--accent)]">
+                {document.title}
+              </a>
+              <p className="text-sm text-[var(--fg-dim)]">{document.originalName}{document.postSlug ? ` · linked to ${posts.find((post) => post.slug === document.postSlug)?.title ?? document.postSlug}` : ""}</p>
+            </div>
+            <button onClick={() => onRemove(document.filename)} className="text-sm text-[var(--fg-dim)] hover:text-red-400">Remove</button>
+          </div>
+        ))}
+        {documents.length === 0 && <p className="text-sm text-[var(--fg-dim)]">No standalone documents.</p>}
+      </div>
+    </div>
+  );
+}
 function emptyPost(): Post {
   return {
     slug: "",
@@ -29,15 +101,18 @@ export default function AdminDashboard({
   initialProjects,
   initialPosts,
   initialPdfs,
+  initialDocuments,
 }: {
   initialProjects: Project[];
   initialPosts: Post[];
   initialPdfs: Record<string, PdfEntry[]>;
+  initialDocuments: DocumentEntry[];
 }) {
   const [tab, setTab] = useState<Tab>("projects");
   const [projects, setProjects] = useState(initialProjects);
   const [posts, setPosts] = useState(initialPosts);
   const [pdfs, setPdfs] = useState(initialPdfs);
+  const [documents, setDocuments] = useState(initialDocuments);
 
   const [editingProject, setEditingProject] = useState<Project | null>(null);
   const [editingPost, setEditingPost] = useState<Post | null>(null);
@@ -115,6 +190,26 @@ export default function AdminDashboard({
     }
   }
 
+  async function uploadDocument(form: FormData) {
+    setError("");
+    const res = await fetch("/api/admin/documents", { method: "POST", body: form });
+    const data = await res.json();
+    if (!res.ok) {
+      setError(data.error ?? "Upload failed.");
+      return;
+    }
+    setDocuments((prev) => [...prev, data.entry].sort((a, b) => a.title.localeCompare(b.title)));
+  }
+
+  async function removeDocument(filename: string) {
+    const res = await fetch("/api/admin/documents", {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ filename }),
+    });
+    if (res.ok) setDocuments((prev) => prev.filter((document) => document.filename !== filename));
+  }
+
   // ---- posts ----
 
   async function savePost(post: Post, isNew: boolean) {
@@ -149,7 +244,7 @@ export default function AdminDashboard({
   return (
     <div className="flex flex-col gap-8">
       <div className="flex gap-2 border-b border-[var(--line)]">
-        {(["projects", "posts"] as Tab[]).map((t) => (
+        {(["projects", "documents", "posts"] as Tab[]).map((t) => (
           <button
             key={t}
             onClick={() => {
@@ -258,6 +353,13 @@ export default function AdminDashboard({
             ))}
           </div>
         </div>
+      ) : tab === "documents" ? (
+        <DocumentsManager
+          documents={documents}
+          posts={posts}
+          onUpload={uploadDocument}
+          onRemove={removeDocument}
+        />
       ) : (
         <div className="flex flex-col gap-8">
           {editingPost ? (
