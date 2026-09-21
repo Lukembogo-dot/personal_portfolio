@@ -1,0 +1,15 @@
+{
+  "slug": "kenya-sentinel",
+  "order": 3,
+  "name": "Kenya Sentinel",
+  "role": "Data / ML pipeline",
+  "blurb": "A monitoring and detection system built around a streaming data pipeline, with a trained classification model behind it and infrastructure to run it in production.",
+  "stack": [
+    "FastAPI",
+    "Kafka",
+    "Docker",
+    "Scikit-learn",
+    "AWS"
+  ],
+  "notes": []
+}

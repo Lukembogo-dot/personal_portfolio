@@ -1,0 +1,7 @@
+{
+  "slug": "pady-2",
+  "title": "Pady 2",
+  "date": "2026-09-21",
+  "excerpt": "Backup tool",
+  "body": "  PADY BACKUP TOOL\n\nTO START A BACKUP:\n\n  Double-click  \"Start Backup.exe\"\n\nThat's it. It will:\n  1. Scan your Documents, Pictures, Desktop, and Downloads\n  2. Let you choose what to back up and any filters\n     (it remembers your choices from last time - press\n     Enter to reuse them, or type new values)\n  3. Show you the estimated size and time, and ask to confirm\n  4. Save a single .zip file onto this drive\n\nNothing is copied or deleted until you confirm with \"Y\".\n"
+}

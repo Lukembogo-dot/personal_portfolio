@@ -1,0 +1,21 @@
+{
+  "slug": "shamba-pro",
+  "order": 2,
+  "name": "Shamba Pro",
+  "role": "Pig farm management ERP",
+  "blurb": "Built for my family's pig farming operation. Tracks animals by batch with human-readable tags, covers breeding cycles and weight targets, and has a feature-flagged path to individual animal tracking once ear tags are affordable.",
+  "stack": [
+    "Node.js",
+    "Express",
+    "TypeScript",
+    "Supabase / PostgreSQL",
+    "Next.js",
+    "shadcn/ui",
+    "Tailwind CSS"
+  ],
+  "notes": [
+    "Batch-based tracking (e.g. BTC-PIG-APR25-001) instead of per-animal records",
+    "Farm constants built in: 114-day gestation, 90kg target weight, KES 350/kg",
+    "Full dashboard covering animals, records, reports, breeding, settings"
+  ]
+}
