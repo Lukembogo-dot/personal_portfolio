@@ -1,0 +1,7 @@
+{
+  "slug": "network-security-groups-and-application-security-groups",
+  "title": "Network Security Groups and Application Security Groups",
+  "date": "2026-09-23",
+  "excerpt": "Cloud and Network Security.",
+  "body": "# Azure Virtual Networking and Application Security Groups Lab\n\nIn this lab, I implement a **virtual networking infrastructure in Azure** to support two groups of servers: **Web Servers** and **Management Servers**.\n\nEach group is placed in its own **Application Security Group (ASG)** to enable **role-based traffic control** and improve network security.\n\n## Configuration Objectives\n\nThe configuration ensures that:\n\n- **Web Servers** are accessible over **HTTP** from the internet but do not allow **RDP** access.\n- **Management Servers** are accessible over **RDP only** for administrative purposes.\n\nThis setup demonstrates how **Azure Application Security Groups and network security rules** can be used to enforce access controls based on server roles."
+}

@@ -1,0 +1,7 @@
+{
+  "slug": "azure-firewall-microsoft-azure",
+  "title": "Azure Firewall (Microsoft Azure)",
+  "date": "2025-08-20",
+  "excerpt": "Azure Firewall Cofiguration",
+  "body": "# Azure Firewall Network Security Lab\n\nThis lab focuses on strengthening **network security** by deploying and configuring **Azure Firewall** to manage inbound and outbound traffic.\n\n## Objective\n\nThe objective is to build a **secure virtual environment** with clearly defined access rules and strict traffic control.\n\n## Lab Scope\n\nThe lab includes:\n\n- Creating an **Azure Virtual Network (VNet)**\n- Deploying **Virtual Machines (VMs)**\n- Configuring **routing**\n- Setting up **Azure Firewall rules**\n- Configuring **DNS**\n- Enforcing strict **inbound and outbound traffic control**\n\nThe resulting environment demonstrates how Azure Firewall can be used to control and secure network communication within an Azure infrastructure."
+}

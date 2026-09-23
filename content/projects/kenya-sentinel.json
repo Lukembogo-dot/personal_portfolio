@@ -1,15 +1,26 @@
 {
   "slug": "kenya-sentinel",
-  "order": 3,
+  "order": 1790169473712,
   "name": "Kenya Sentinel",
-  "role": "Data / ML pipeline",
-  "blurb": "A monitoring and detection system built around a streaming data pipeline, with a trained classification model behind it and infrastructure to run it in production.",
+  "role": "Machine Learning",
+  "blurb": "A few weeks ago, I built a real-time YouTube toxicity tracker using AWS Kinesis and AWS Comprehend. It worked. It was fast. But it felt like a \"black box.\" I wanted to see under the hood, so I tore it down and rebuilt it from scratch using Apache Kafka and a custom Scikit-Learn model.",
   "stack": [
-    "FastAPI",
+    "SoftwareEngineering",
+    "AWS",
     "Kafka",
-    "Docker",
-    "Scikit-learn",
-    "AWS"
+    "MachineLearning",
+    "Python",
+    "React",
+    "DataPipelines"
   ],
-  "notes": []
+  "notes": [
+    "The Stack: Kinesis + Comprehend + Lambda.",
+    "The Experience: It’s incredibly polished. You plug things in, pay your bill, and it works.",
+    "The Catch: I was limited by what AWS thought \"Negative\" meant. I had no control over the \"why.\"",
+    "The Experience: I had to manage the broker, handle the message offsets, and train the model myself.",
+    "The biggest shift wasn't just the tools—it was the logic.",
+    "In my AWS version, I got back a label: \"Negative.\" In my custom Kafka version, I get back a Raw Risk Score (e.g., 87.4%).",
+    "By leveraging my own Logistic Regression model, I stopped letting a pre-built API decide what was \"Toxic.\" I built a Risk Threshold slider in React that allows the end-user to decide the sensitivity. If you want to see only the absolute worst 95% risk"
+  ],
+  "links": []
 }

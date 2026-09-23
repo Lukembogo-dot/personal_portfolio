@@ -1,0 +1,8 @@
+{
+  "filename": "1790164168780__CloudGoat.pdf",
+  "originalName": "CloudGoat.pdf",
+  "title": "Cloud Goat",
+  "description": "The exercise was performed in a controlled AWS environment, and all actions were aimed at\r\nsimulating real-world misconfigurations and access control issues commonly found in cloud\r\ninfrastructures. The goal was to identify, exploit, and understand the implications of privilege\r\nescalation paths that stem from weak IAM policy version control and rollback permissions.",
+  "postSlug": "cloud-goat-excercise",
+  "size": 6635872
+}

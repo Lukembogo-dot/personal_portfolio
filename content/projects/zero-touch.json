@@ -1,0 +1,19 @@
+{
+  "slug": "zero-touch",
+  "order": 1790161758718,
+  "name": "Zero-Touch",
+  "role": "Computer Vision",
+  "blurb": "Holographic Gesture Control System with one goal in mind: complete media autonomy without ever touching a key. Whether I’m coding, working out, or just relaxing, I wanted a way to skip tracks, adjust volume, and play/pause Spotify without breaking my flow or reaching for my device.",
+  "stack": [
+    "Computer Vision",
+    "Python",
+    "OpenCV",
+    "MediaPipeline"
+  ],
+  "notes": [
+    "The Precision Pinch: Forget shaky volume sliders. By calculating the Euclidean distance between the thumb and index finger, I’ve created a \"virtual dial\" in the air.",
+    "Intent Recognition: Using a 1.5s temporal hold for the \"Fist\" gesture, the system now distinguishes between you moving your hand and you actually wanting to Pause/Play.",
+    "Return-Swipe Shield:  The system ignores movement for 0.8s after a track skip, making the experience rock-solid."
+  ],
+  "links": []
+}
