@@ -1,0 +1,7 @@
+{
+  "slug": "cloud-goat-excercise",
+  "title": "Cloud Goat Excercise",
+  "date": "2026-09-23",
+  "excerpt": "Cloud and Network Security",
+  "body": "# Privilege Escalation Assessment Report\n\nThis report documents the exploitation of a **privilege escalation vulnerability** simulated using **CloudGoat**, a deliberately insecure AWS environment designed for security training.\n\nThe focus of this assessment was the **`iam_privesc_by_rollback`** scenario, which demonstrates how an attacker with limited IAM permissions can escalate their privileges by leveraging **previous versions of a managed IAM policy**."
+}
