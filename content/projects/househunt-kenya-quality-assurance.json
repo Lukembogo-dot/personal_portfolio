@@ -3,7 +3,7 @@
   "order": 1790168821446,
   "name": "Househunt Kenya Quality Assurance",
   "role": "Quality Assurance/ Quality Engineering",
-  "blurb": "I took a deep dive into testing a real-world property platform, focusing on both manual testing and test automation.",
+  "blurb": "I took a deep dive into testing a real-world property platform, focusing on both manual testing and test automation. Designed and executed manual test cases across core user flows",
   "stack": [
     "QA",
     "SoftwareTesting",
@@ -11,7 +11,6 @@
     "Playwright"
   ],
   "notes": [
-    "##Designed and executed manual test cases across core user flows",
     "Built and ran 50+ automated tests using Playwright",
     "Covered critical areas including:",
     "Homepage & navigation",
@@ -20,7 +19,6 @@
     "Authentication (Login & Registration)",
     "FAQ & informational sections",
     "Live stats & interactive features",
-    "##⚙️Automation Highlights:",
     "Structured test suites across 8 spec files",
     "Validated UI elements, user interactions & navigation flows",
     "Tested edge cases like:",
