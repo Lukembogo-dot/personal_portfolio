@@ -1,0 +1,7 @@
+{
+  "slug": "key-vault-and-encryption",
+  "title": "Key Vault and Encryption",
+  "date": "2026-09-23",
+  "excerpt": "Microsoft Azure",
+  "body": "# Azure Key Vault and Encryption Lab Report\n\nThis report documents the **steps and outcomes** of a practical exercise involving the deployment and management of **Azure resources**, with a specific focus on **Azure Key Vault** and encryption-related configurations.\n\n## Purpose\n\nThe purpose of this lab was to simulate **real-world cloud administration and security tasks** as part of an Azure training assignment.\n\nThe exercise also emphasized **cost management** by efficiently managing, monitoring, and cleaning up deployed resources to minimize unnecessary cloud costs."
+}
