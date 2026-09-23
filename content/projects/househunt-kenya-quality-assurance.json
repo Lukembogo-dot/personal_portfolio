@@ -11,7 +11,7 @@
     "Playwright"
   ],
   "notes": [
-    "-- Designed and executed manual test cases across core user flows",
+    "##Designed and executed manual test cases across core user flows",
     "Built and ran 50+ automated tests using Playwright",
     "Covered critical areas including:",
     "Homepage & navigation",
@@ -20,7 +20,7 @@
     "Authentication (Login & Registration)",
     "FAQ & informational sections",
     "Live stats & interactive features",
-    "⚙️Automation Highlights:",
+    "##⚙️Automation Highlights:",
     "Structured test suites across 8 spec files",
     "Validated UI elements, user interactions & navigation flows",
     "Tested edge cases like:",
