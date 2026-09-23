@@ -1,0 +1,14 @@
+{
+  "slug": "zero-touch",
+  "order": 1790161758718,
+  "name": "Zero-Touch",
+  "role": "Computer Vision",
+  "blurb": "✅ The Precision Pinch: Forget shaky volume sliders. By calculating the Euclidean distance between the thumb and index finger, I’ve created a \"virtual dial\" in the air. \n\n✅ Intent Recognition: Using a 1.5s temporal hold for the \"Fist\" gesture, the system now distinguishes between you moving your hand and you actually wanting to Pause/Play. \n\n✅ Return-Swipe Shield: Solved the biggest headache in gesture CV—the \"accidental back-swipe.\" The system now ignores movement for 0.8s after a track skip, making the experience rock-solid.",
+  "stack": [
+    "Computer Vision.Python.HCI.MediaPipe"
+  ],
+  "notes": [
+    "FunProjects"
+  ],
+  "links": []
+}
