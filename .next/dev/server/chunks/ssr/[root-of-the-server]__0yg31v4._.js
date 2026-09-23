@@ -84,7 +84,7 @@ async function AdminPage({ searchParams }) {
                         children: "Admin"
                     }, void 0, false, {
                         fileName: "[project]/src/app/admin/page.tsx",
-                        lineNumber: 32,
+                        lineNumber: 35,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -92,7 +92,7 @@ async function AdminPage({ searchParams }) {
                         children: "Sign in to manage projects, PDFs, and blog posts."
                     }, void 0, false, {
                         fileName: "[project]/src/app/admin/page.tsx",
-                        lineNumber: 33,
+                        lineNumber: 36,
                         columnNumber: 11
                     }, this),
                     error && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -100,7 +100,7 @@ async function AdminPage({ searchParams }) {
                         children: "Incorrect password."
                     }, void 0, false, {
                         fileName: "[project]/src/app/admin/page.tsx",
-                        lineNumber: 36,
+                        lineNumber: 39,
                         columnNumber: 21
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -111,7 +111,7 @@ async function AdminPage({ searchParams }) {
                         className: "w-full bg-transparent border border-[var(--line)] rounded px-3 py-2 text-sm mb-4"
                     }, void 0, false, {
                         fileName: "[project]/src/app/admin/page.tsx",
-                        lineNumber: 37,
+                        lineNumber: 40,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -120,35 +120,43 @@ async function AdminPage({ searchParams }) {
                         children: "Sign in"
                     }, void 0, false, {
                         fileName: "[project]/src/app/admin/page.tsx",
-                        lineNumber: 44,
+                        lineNumber: 47,
                         columnNumber: 11
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/admin/page.tsx",
-                lineNumber: 27,
+                lineNumber: 30,
                 columnNumber: 9
             }, this)
         }, void 0, false, {
             fileName: "[project]/src/app/admin/page.tsx",
-            lineNumber: 26,
+            lineNumber: 29,
             columnNumber: 7
         }, this);
     }
     let projects = [];
     let posts = [];
     let pdfs = {};
+    let images = {};
     let documents = [];
+    let certifications = [];
     let loadError = "";
     try {
         projects = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$content$2d$store$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["getProjects"])();
         posts = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$content$2d$store$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["getPosts"])();
         documents = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$content$2d$store$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["getDocuments"])();
+        certifications = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$content$2d$store$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["getCertifications"])();
         const pdfLists = await Promise.all(projects.map(async (p)=>[
                 p.slug,
                 await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$content$2d$store$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["getProjectPdfs"])(p.slug)
             ]));
         pdfs = Object.fromEntries(pdfLists);
+        const imageLists = await Promise.all(projects.map(async (p)=>[
+                p.slug,
+                await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$content$2d$store$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["getProjectImages"])(p.slug)
+            ]));
+        images = Object.fromEntries(imageLists);
     } catch (err) {
         loadError = err.message;
     }
@@ -163,7 +171,7 @@ async function AdminPage({ searchParams }) {
                         children: "Admin"
                     }, void 0, false, {
                         fileName: "[project]/src/app/admin/page.tsx",
-                        lineNumber: 76,
+                        lineNumber: 86,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
@@ -175,18 +183,18 @@ async function AdminPage({ searchParams }) {
                             children: "Sign out"
                         }, void 0, false, {
                             fileName: "[project]/src/app/admin/page.tsx",
-                            lineNumber: 78,
+                            lineNumber: 88,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/src/app/admin/page.tsx",
-                        lineNumber: 77,
+                        lineNumber: 87,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/admin/page.tsx",
-                lineNumber: 75,
+                lineNumber: 85,
                 columnNumber: 7
             }, this),
             loadError ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -198,22 +206,24 @@ async function AdminPage({ searchParams }) {
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/admin/page.tsx",
-                lineNumber: 88,
+                lineNumber: 98,
                 columnNumber: 9
             }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$admin$2f$AdminDashboard$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"], {
                 initialProjects: projects,
                 initialPosts: posts,
                 initialPdfs: pdfs,
-                initialDocuments: documents
+                initialImages: images,
+                initialDocuments: documents,
+                initialCertifications: certifications
             }, void 0, false, {
                 fileName: "[project]/src/app/admin/page.tsx",
-                lineNumber: 93,
+                lineNumber: 103,
                 columnNumber: 9
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/app/admin/page.tsx",
-        lineNumber: 74,
+        lineNumber: 84,
         columnNumber: 5
     }, this);
 }
@@ -271,18 +281,30 @@ function verifyToken(token) {
 __turbopack_context__.s([
     "addDocument",
     ()=>addDocument,
+    "addProjectImage",
+    ()=>addProjectImage,
     "addProjectPdf",
     ()=>addProjectPdf,
+    "deleteCertification",
+    ()=>deleteCertification,
+    "deleteCertificationPdf",
+    ()=>deleteCertificationPdf,
     "deleteDocument",
     ()=>deleteDocument,
     "deletePost",
     ()=>deletePost,
     "deleteProject",
     ()=>deleteProject,
+    "deleteProjectImage",
+    ()=>deleteProjectImage,
     "deleteProjectPdf",
     ()=>deleteProjectPdf,
     "getAllProjectPdfs",
     ()=>getAllProjectPdfs,
+    "getCertificationPdfBytes",
+    ()=>getCertificationPdfBytes,
+    "getCertifications",
+    ()=>getCertifications,
     "getDocumentBytes",
     ()=>getDocumentBytes,
     "getDocuments",
@@ -293,12 +315,18 @@ __turbopack_context__.s([
     ()=>getPosts,
     "getProject",
     ()=>getProject,
+    "getProjectImageBytes",
+    ()=>getProjectImageBytes,
+    "getProjectImages",
+    ()=>getProjectImages,
     "getProjectPdfBytes",
     ()=>getProjectPdfBytes,
     "getProjectPdfs",
     ()=>getProjectPdfs,
     "getProjects",
     ()=>getProjects,
+    "saveCertification",
+    ()=>saveCertification,
     "savePost",
     ()=>savePost,
     "saveProject",
@@ -318,14 +346,22 @@ async function getProjects() {
     const projects = await Promise.all(jsonFiles.map(async (entry)=>{
         const file = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$github$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["getFile"])(entry.path);
         if (!file) return null;
-        return JSON.parse(file.content);
+        const project = JSON.parse(file.content);
+        return {
+            ...project,
+            links: Array.isArray(project.links) ? project.links : []
+        };
     }));
     return projects.filter((p)=>p !== null).sort((a, b)=>a.order - b.order);
 }
 async function getProject(slug) {
     const file = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$github$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["getFile"])(`${PROJECTS_DIR}/${slug}.json`);
     if (!file) return null;
-    return JSON.parse(file.content);
+    const project = JSON.parse(file.content);
+    return {
+        ...project,
+        links: Array.isArray(project.links) ? project.links : []
+    };
 }
 async function saveProject(project) {
     const path = `${PROJECTS_DIR}/${project.slug}.json`;
@@ -344,7 +380,6 @@ function pdfDir(slug) {
 async function getProjectPdfs(slug) {
     const entries = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$github$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["listDir"])(pdfDir(slug));
     return entries.filter((e)=>e.type === "file").map((e)=>{
-        // filenames are stored as "<timestamp>__<original-name>.pdf"
         const [, ...rest] = e.name.split("__");
         const originalName = rest.length > 0 ? rest.join("__") : e.name;
         return {
@@ -353,14 +388,6 @@ async function getProjectPdfs(slug) {
             size: 0
         };
     });
-}
-async function getAllProjectPdfs() {
-    const projects = await getProjects();
-    const results = await Promise.all(projects.map(async (project)=>({
-            project,
-            pdfs: await getProjectPdfs(project.slug)
-        })));
-    return results.filter((r)=>r.pdfs.length > 0);
 }
 async function getProjectPdfBytes(slug, filename) {
     const result = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$github$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["getFileBytes"])(`${pdfDir(slug)}/${filename}`);
@@ -381,6 +408,50 @@ async function deleteProjectPdf(slug, filename) {
     const existing = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$github$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["getFileBytes"])(path);
     if (!existing) return;
     await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$github$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["deleteFile"])(path, existing.sha, `Remove PDF from ${slug}: ${filename}`);
+}
+// ---- project images (optional, per project — used for a carousel) ----
+function imageDir(slug) {
+    return `${PROJECTS_DIR}/${slug}/images`;
+}
+async function getProjectImages(slug) {
+    const entries = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$github$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["listDir"])(imageDir(slug));
+    return entries.filter((e)=>e.type === "file").map((e)=>{
+        const [, ...rest] = e.name.split("__");
+        const originalName = rest.length > 0 ? rest.join("__") : e.name;
+        return {
+            filename: e.name,
+            originalName,
+            size: 0
+        };
+    });
+}
+async function getProjectImageBytes(slug, filename) {
+    const result = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$github$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["getFileBytes"])(`${imageDir(slug)}/${filename}`);
+    return result?.bytes ?? null;
+}
+async function addProjectImage(slug, originalName, bytes) {
+    const safeName = originalName.replace(/[^a-zA-Z0-9._-]/g, "_");
+    const filename = `${Date.now()}__${safeName}`;
+    await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$github$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["putFileBytes"])(`${imageDir(slug)}/${filename}`, bytes, `Add image to ${slug}: ${originalName}`);
+    return {
+        filename,
+        originalName,
+        size: bytes.length
+    };
+}
+async function deleteProjectImage(slug, filename) {
+    const path = `${imageDir(slug)}/${filename}`;
+    const existing = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$github$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["getFileBytes"])(path);
+    if (!existing) return;
+    await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$github$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["deleteFile"])(path, existing.sha, `Remove image from ${slug}: ${filename}`);
+}
+async function getAllProjectPdfs() {
+    const projects = await getProjects();
+    const results = await Promise.all(projects.map(async (project)=>({
+            project,
+            pdfs: await getProjectPdfs(project.slug)
+        })));
+    return results.filter((r)=>r.pdfs.length > 0);
 }
 const DOCUMENTS_DIR = "content/documents";
 function documentMetadataPath(filename) {
@@ -423,6 +494,49 @@ async function deleteDocument(filename) {
     const existingMetadata = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$github$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["getFile"])(metadataPath);
     if (existingMetadata) {
         await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$github$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["deleteFile"])(metadataPath, existingMetadata.sha, `Remove document metadata: ${filename}`);
+    }
+}
+const CERTIFICATIONS_DIR = "content/certifications";
+const CERTIFICATION_FILES_DIR = `${CERTIFICATIONS_DIR}/files`;
+function certificationMetadataPath(slug) {
+    return `${CERTIFICATIONS_DIR}/${slug}.json`;
+}
+async function getCertifications() {
+    const entries = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$github$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["listDir"])(CERTIFICATIONS_DIR);
+    const metadataFiles = entries.filter((entry)=>entry.type === "file" && entry.name.endsWith(".json"));
+    const certifications = await Promise.all(metadataFiles.map(async (entry)=>{
+        const file = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$github$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["getFile"])(entry.path);
+        if (!file) return null;
+        return JSON.parse(file.content);
+    }));
+    return certifications.filter((certification)=>certification !== null).sort((a, b)=>a.title.localeCompare(b.title));
+}
+async function getCertificationPdfBytes(filename) {
+    const result = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$github$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["getFileBytes"])(`${CERTIFICATION_FILES_DIR}/${filename}`);
+    return result?.bytes ?? null;
+}
+async function saveCertification(certification, pdf) {
+    const metadataPath = certificationMetadataPath(certification.slug);
+    const existing = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$github$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["getFile"])(metadataPath);
+    if (pdf) {
+        await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$github$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["putFileBytes"])(`${CERTIFICATION_FILES_DIR}/${pdf.filename}`, pdf.bytes, `Add certificate PDF: ${certification.title}`);
+    }
+    await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$github$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["putFile"])(metadataPath, JSON.stringify(certification, null, 2), existing ? `Update certification: ${certification.title}` : `Add certification: ${certification.title}`, existing?.sha);
+}
+async function deleteCertificationPdf(certification) {
+    if (!certification.pdfFilename) return;
+    const pdfPath = `${CERTIFICATION_FILES_DIR}/${certification.pdfFilename}`;
+    const existingPdf = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$github$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["getFileBytes"])(pdfPath);
+    if (existingPdf) {
+        await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$github$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["deleteFile"])(pdfPath, existingPdf.sha, `Remove certificate PDF: ${certification.title}`);
+    }
+}
+async function deleteCertification(certification) {
+    await deleteCertificationPdf(certification);
+    const metadataPath = certificationMetadataPath(certification.slug);
+    const existingMetadata = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$github$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["getFile"])(metadataPath);
+    if (existingMetadata) {
+        await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$github$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["deleteFile"])(metadataPath, existingMetadata.sha, `Remove certification: ${certification.title}`);
     }
 }
 const POSTS_DIR = "content/posts";

@@ -100,7 +100,7 @@ async function POST(req) {
     const unauth = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$require$2d$admin$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["requireAdmin"])();
     if (unauth) return unauth;
     const body = await req.json();
-    const { name, role, blurb, stack, notes, order } = body;
+    const { name, role, blurb, stack, notes, order, links } = body;
     if (!name || typeof name !== "string") {
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
             error: "Project name is required"
@@ -124,7 +124,8 @@ async function POST(req) {
             role: role ?? "",
             blurb: blurb ?? "",
             stack: Array.isArray(stack) ? stack : [],
-            notes: Array.isArray(notes) ? notes : []
+            notes: Array.isArray(notes) ? notes : [],
+            links: Array.isArray(links) ? links : []
         };
         await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$content$2d$store$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["saveProject"])(project);
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
@@ -170,18 +171,30 @@ function verifyToken(token) {
 __turbopack_context__.s([
     "addDocument",
     ()=>addDocument,
+    "addProjectImage",
+    ()=>addProjectImage,
     "addProjectPdf",
     ()=>addProjectPdf,
+    "deleteCertification",
+    ()=>deleteCertification,
+    "deleteCertificationPdf",
+    ()=>deleteCertificationPdf,
     "deleteDocument",
     ()=>deleteDocument,
     "deletePost",
     ()=>deletePost,
     "deleteProject",
     ()=>deleteProject,
+    "deleteProjectImage",
+    ()=>deleteProjectImage,
     "deleteProjectPdf",
     ()=>deleteProjectPdf,
     "getAllProjectPdfs",
     ()=>getAllProjectPdfs,
+    "getCertificationPdfBytes",
+    ()=>getCertificationPdfBytes,
+    "getCertifications",
+    ()=>getCertifications,
     "getDocumentBytes",
     ()=>getDocumentBytes,
     "getDocuments",
@@ -192,12 +205,18 @@ __turbopack_context__.s([
     ()=>getPosts,
     "getProject",
     ()=>getProject,
+    "getProjectImageBytes",
+    ()=>getProjectImageBytes,
+    "getProjectImages",
+    ()=>getProjectImages,
     "getProjectPdfBytes",
     ()=>getProjectPdfBytes,
     "getProjectPdfs",
     ()=>getProjectPdfs,
     "getProjects",
     ()=>getProjects,
+    "saveCertification",
+    ()=>saveCertification,
     "savePost",
     ()=>savePost,
     "saveProject",
@@ -217,14 +236,22 @@ async function getProjects() {
     const projects = await Promise.all(jsonFiles.map(async (entry)=>{
         const file = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$github$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getFile"])(entry.path);
         if (!file) return null;
-        return JSON.parse(file.content);
+        const project = JSON.parse(file.content);
+        return {
+            ...project,
+            links: Array.isArray(project.links) ? project.links : []
+        };
     }));
     return projects.filter((p)=>p !== null).sort((a, b)=>a.order - b.order);
 }
 async function getProject(slug) {
     const file = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$github$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getFile"])(`${PROJECTS_DIR}/${slug}.json`);
     if (!file) return null;
-    return JSON.parse(file.content);
+    const project = JSON.parse(file.content);
+    return {
+        ...project,
+        links: Array.isArray(project.links) ? project.links : []
+    };
 }
 async function saveProject(project) {
     const path = `${PROJECTS_DIR}/${project.slug}.json`;
@@ -243,7 +270,6 @@ function pdfDir(slug) {
 async function getProjectPdfs(slug) {
     const entries = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$github$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["listDir"])(pdfDir(slug));
     return entries.filter((e)=>e.type === "file").map((e)=>{
-        // filenames are stored as "<timestamp>__<original-name>.pdf"
         const [, ...rest] = e.name.split("__");
         const originalName = rest.length > 0 ? rest.join("__") : e.name;
         return {
@@ -252,14 +278,6 @@ async function getProjectPdfs(slug) {
             size: 0
         };
     });
-}
-async function getAllProjectPdfs() {
-    const projects = await getProjects();
-    const results = await Promise.all(projects.map(async (project)=>({
-            project,
-            pdfs: await getProjectPdfs(project.slug)
-        })));
-    return results.filter((r)=>r.pdfs.length > 0);
 }
 async function getProjectPdfBytes(slug, filename) {
     const result = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$github$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getFileBytes"])(`${pdfDir(slug)}/${filename}`);
@@ -280,6 +298,50 @@ async function deleteProjectPdf(slug, filename) {
     const existing = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$github$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getFileBytes"])(path);
     if (!existing) return;
     await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$github$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["deleteFile"])(path, existing.sha, `Remove PDF from ${slug}: ${filename}`);
+}
+// ---- project images (optional, per project — used for a carousel) ----
+function imageDir(slug) {
+    return `${PROJECTS_DIR}/${slug}/images`;
+}
+async function getProjectImages(slug) {
+    const entries = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$github$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["listDir"])(imageDir(slug));
+    return entries.filter((e)=>e.type === "file").map((e)=>{
+        const [, ...rest] = e.name.split("__");
+        const originalName = rest.length > 0 ? rest.join("__") : e.name;
+        return {
+            filename: e.name,
+            originalName,
+            size: 0
+        };
+    });
+}
+async function getProjectImageBytes(slug, filename) {
+    const result = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$github$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getFileBytes"])(`${imageDir(slug)}/${filename}`);
+    return result?.bytes ?? null;
+}
+async function addProjectImage(slug, originalName, bytes) {
+    const safeName = originalName.replace(/[^a-zA-Z0-9._-]/g, "_");
+    const filename = `${Date.now()}__${safeName}`;
+    await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$github$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["putFileBytes"])(`${imageDir(slug)}/${filename}`, bytes, `Add image to ${slug}: ${originalName}`);
+    return {
+        filename,
+        originalName,
+        size: bytes.length
+    };
+}
+async function deleteProjectImage(slug, filename) {
+    const path = `${imageDir(slug)}/${filename}`;
+    const existing = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$github$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getFileBytes"])(path);
+    if (!existing) return;
+    await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$github$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["deleteFile"])(path, existing.sha, `Remove image from ${slug}: ${filename}`);
+}
+async function getAllProjectPdfs() {
+    const projects = await getProjects();
+    const results = await Promise.all(projects.map(async (project)=>({
+            project,
+            pdfs: await getProjectPdfs(project.slug)
+        })));
+    return results.filter((r)=>r.pdfs.length > 0);
 }
 const DOCUMENTS_DIR = "content/documents";
 function documentMetadataPath(filename) {
@@ -322,6 +384,49 @@ async function deleteDocument(filename) {
     const existingMetadata = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$github$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getFile"])(metadataPath);
     if (existingMetadata) {
         await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$github$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["deleteFile"])(metadataPath, existingMetadata.sha, `Remove document metadata: ${filename}`);
+    }
+}
+const CERTIFICATIONS_DIR = "content/certifications";
+const CERTIFICATION_FILES_DIR = `${CERTIFICATIONS_DIR}/files`;
+function certificationMetadataPath(slug) {
+    return `${CERTIFICATIONS_DIR}/${slug}.json`;
+}
+async function getCertifications() {
+    const entries = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$github$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["listDir"])(CERTIFICATIONS_DIR);
+    const metadataFiles = entries.filter((entry)=>entry.type === "file" && entry.name.endsWith(".json"));
+    const certifications = await Promise.all(metadataFiles.map(async (entry)=>{
+        const file = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$github$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getFile"])(entry.path);
+        if (!file) return null;
+        return JSON.parse(file.content);
+    }));
+    return certifications.filter((certification)=>certification !== null).sort((a, b)=>a.title.localeCompare(b.title));
+}
+async function getCertificationPdfBytes(filename) {
+    const result = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$github$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getFileBytes"])(`${CERTIFICATION_FILES_DIR}/${filename}`);
+    return result?.bytes ?? null;
+}
+async function saveCertification(certification, pdf) {
+    const metadataPath = certificationMetadataPath(certification.slug);
+    const existing = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$github$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getFile"])(metadataPath);
+    if (pdf) {
+        await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$github$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["putFileBytes"])(`${CERTIFICATION_FILES_DIR}/${pdf.filename}`, pdf.bytes, `Add certificate PDF: ${certification.title}`);
+    }
+    await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$github$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["putFile"])(metadataPath, JSON.stringify(certification, null, 2), existing ? `Update certification: ${certification.title}` : `Add certification: ${certification.title}`, existing?.sha);
+}
+async function deleteCertificationPdf(certification) {
+    if (!certification.pdfFilename) return;
+    const pdfPath = `${CERTIFICATION_FILES_DIR}/${certification.pdfFilename}`;
+    const existingPdf = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$github$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getFileBytes"])(pdfPath);
+    if (existingPdf) {
+        await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$github$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["deleteFile"])(pdfPath, existingPdf.sha, `Remove certificate PDF: ${certification.title}`);
+    }
+}
+async function deleteCertification(certification) {
+    await deleteCertificationPdf(certification);
+    const metadataPath = certificationMetadataPath(certification.slug);
+    const existingMetadata = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$github$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getFile"])(metadataPath);
+    if (existingMetadata) {
+        await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$github$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["deleteFile"])(metadataPath, existingMetadata.sha, `Remove certification: ${certification.title}`);
     }
 }
 const POSTS_DIR = "content/posts";

@@ -4,7 +4,6 @@ import ThemeToggle from "./ThemeToggle";
 const links = [
   { href: "/", label: "Home" },
   { href: "/projects", label: "Projects" },
-  { href: "/documents", label: "Documents" },  // add this line
   { href: "/blog", label: "Blog" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
@@ -29,6 +28,12 @@ export default function SiteHeader() {
               </Link>
             ))}
           </nav>
+          <Link
+            href="/certifications"
+            className="shrink-0 text-sm border border-[var(--accent)] text-[var(--accent)] rounded px-3 py-1.5 hover:bg-[var(--accent)] hover:text-[var(--bg)] transition-colors"
+          >
+            Certifications
+          </Link>
           <ThemeToggle />
         </div>
       </div>

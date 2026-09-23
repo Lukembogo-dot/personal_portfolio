@@ -42,8 +42,9 @@ export default async function Home() {
         items={[
           "IT PROFESSIONAL",
           "QA & TESTING",
+          "DEVOPS",
           "BACKEND DEVELOPMENT",
-          "DATA ENGINEERING",
+          "CYBERSECURITY",
           "NAIROBI, KENYA",
         ]}
       />

@@ -2,8 +2,10 @@ import { NextRequest, NextResponse } from "next/server";
 import { requireAdmin } from "@/lib/require-admin";
 import {
   deleteProject,
+  deleteProjectImage,
   deleteProjectPdf,
   getProject,
+  getProjectImages,
   getProjectPdfs,
   saveProject,
   type Project,
@@ -18,7 +20,7 @@ export async function PUT(
 
   const { slug } = await params;
   const body = await req.json();
-  const { name, role, blurb, stack, notes, order } = body as Partial<Project>;
+  const { name, role, blurb, stack, notes, order, links } = body as Partial<Project>;
 
   try {
     const existing = await getProject(slug);
@@ -34,6 +36,7 @@ export async function PUT(
       blurb: blurb ?? existing.blurb,
       stack: Array.isArray(stack) ? stack : existing.stack,
       notes: Array.isArray(notes) ? notes : existing.notes,
+      links: Array.isArray(links) ? links : existing.links,
     };
 
     await saveProject(project);
@@ -53,10 +56,13 @@ export async function DELETE(
   const { slug } = await params;
 
   try {
-    // Cascade: remove any attached PDFs first, then the project itself.
     const pdfs = await getProjectPdfs(slug);
     for (const pdf of pdfs) {
       await deleteProjectPdf(slug, pdf.filename);
+    }
+    const images = await getProjectImages(slug);
+    for (const image of images) {
+      await deleteProjectImage(slug, image.filename);
     }
     await deleteProject(slug);
     return NextResponse.json({ ok: true });

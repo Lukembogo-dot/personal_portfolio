@@ -1,16 +1,8 @@
 {
-  "/about/page": "app/about/page.js",
   "/admin/page": "app/admin/page.js",
-  "/api/admin/posts/[slug]/route": "app/api/admin/posts/[slug]/route.js",
-  "/api/admin/posts/route": "app/api/admin/posts/route.js",
-  "/api/admin/projects/[slug]/pdfs/route": "app/api/admin/projects/[slug]/pdfs/route.js",
-  "/api/admin/projects/route": "app/api/admin/projects/route.js",
-  "/api/documents/[filename]/route": "app/api/documents/[filename]/route.js",
-  "/api/pdfs/[slug]/[filename]/route": "app/api/pdfs/[slug]/[filename]/route.js",
-  "/blog/[slug]/page": "app/blog/[slug]/page.js",
+  "/api/images/[slug]/[filename]/route": "app/api/images/[slug]/[filename]/route.js",
   "/blog/page": "app/blog/page.js",
   "/contact/page": "app/contact/page.js",
-  "/documents/page": "app/documents/page.js",
   "/page": "app/page.js",
   "/projects/[slug]/page": "app/projects/[slug]/page.js",
   "/projects/page": "app/projects/page.js"

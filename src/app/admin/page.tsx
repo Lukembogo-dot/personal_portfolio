@@ -2,10 +2,13 @@ import { cookies } from "next/headers";
 import { verifyToken } from "@/lib/auth";
 import {
   getDocuments,
+  getCertifications,
+  getProjectImages,
   getProjectPdfs,
   getProjects,
   getPosts,
   type DocumentEntry,
+  type Certification,
   type PdfEntry,
 } from "@/lib/content-store";
 import AdminDashboard from "./AdminDashboard";
@@ -55,17 +58,24 @@ export default async function AdminPage({
   let projects: Awaited<ReturnType<typeof getProjects>> = [];
   let posts: Awaited<ReturnType<typeof getPosts>> = [];
   let pdfs: Record<string, PdfEntry[]> = {};
+  let images: Record<string, PdfEntry[]> = {};
   let documents: DocumentEntry[] = [];
+  let certifications: Certification[] = [];
   let loadError = "";
 
   try {
     projects = await getProjects();
     posts = await getPosts();
     documents = await getDocuments();
+    certifications = await getCertifications();
     const pdfLists = await Promise.all(
       projects.map(async (p) => [p.slug, await getProjectPdfs(p.slug)] as const)
     );
     pdfs = Object.fromEntries(pdfLists);
+    const imageLists = await Promise.all(
+      projects.map(async (p) => [p.slug, await getProjectImages(p.slug)] as const)
+    );
+    images = Object.fromEntries(imageLists);
   } catch (err) {
     loadError = (err as Error).message;
   }
@@ -94,7 +104,9 @@ export default async function AdminPage({
           initialProjects={projects}
           initialPosts={posts}
           initialPdfs={pdfs}
+          initialImages={images}
           initialDocuments={documents}
+          initialCertifications={certifications}
         />
       )}
     </div>

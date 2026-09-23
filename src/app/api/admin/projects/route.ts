@@ -18,7 +18,7 @@ export async function POST(req: NextRequest) {
   if (unauth) return unauth;
 
   const body = await req.json();
-  const { name, role, blurb, stack, notes, order } = body as Partial<Project>;
+  const { name, role, blurb, stack, notes, order, links } = body as Partial<Project>;
 
   if (!name || typeof name !== "string") {
     return NextResponse.json({ error: "Project name is required" }, { status: 400 });
@@ -42,6 +42,7 @@ export async function POST(req: NextRequest) {
       blurb: blurb ?? "",
       stack: Array.isArray(stack) ? stack : [],
       notes: Array.isArray(notes) ? notes : [],
+      links: Array.isArray(links) ? links : [],
     };
 
     await saveProject(project);

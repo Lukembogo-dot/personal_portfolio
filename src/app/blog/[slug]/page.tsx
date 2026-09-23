@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { marked } from "marked";
-import { getPost } from "@/lib/content-store";
+import { getDocuments, getPost } from "@/lib/content-store";
 
 export const dynamic = "force-dynamic";
 
@@ -22,6 +22,7 @@ export default async function PostPage({
   const post = await getPost(slug);
   if (!post) notFound();
 
+  const documents = await getDocuments();
   const html = await marked.parse(post.body || "");
 
   return (
@@ -34,6 +35,15 @@ export default async function PostPage({
       <h1 className="mt-2 font-[family-name:var(--font-display)] text-3xl lg:text-4xl">
         {post.title}
       </h1>
+
+      {documents.some((document) => document.postSlug === slug) && (
+        <Link
+          href={`/documents?post=${encodeURIComponent(slug)}`}
+          className="inline-block mt-6 text-sm text-[var(--accent)] border border-[var(--accent)] rounded px-4 py-2"
+        >
+          View related documentation →
+        </Link>
+      )}
 
       <div
         className="prose-post mt-10 text-[var(--fg)]"

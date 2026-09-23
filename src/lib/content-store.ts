@@ -20,6 +20,7 @@ export type Project = {
   blurb: string;
   stack: string[];
   notes: string[];
+  links: { label: string; url: string }[];
 };
 
 const PROJECTS_DIR = "content/projects";
@@ -32,7 +33,11 @@ export async function getProjects(): Promise<Project[]> {
     jsonFiles.map(async (entry) => {
       const file = await getFile(entry.path);
       if (!file) return null;
-      return JSON.parse(file.content) as Project;
+      const project = JSON.parse(file.content) as Project;
+      return {
+        ...project,
+        links: Array.isArray(project.links) ? project.links : [],
+      } as Project;
     })
   );
 
@@ -44,7 +49,11 @@ export async function getProjects(): Promise<Project[]> {
 export async function getProject(slug: string): Promise<Project | null> {
   const file = await getFile(`${PROJECTS_DIR}/${slug}.json`);
   if (!file) return null;
-  return JSON.parse(file.content) as Project;
+  const project = JSON.parse(file.content) as Project;
+  return {
+    ...project,
+    links: Array.isArray(project.links) ? project.links : [],
+  } as Project;
 }
 
 export async function saveProject(project: Project): Promise<void> {
@@ -82,24 +91,10 @@ export async function getProjectPdfs(slug: string): Promise<PdfEntry[]> {
   return entries
     .filter((e) => e.type === "file")
     .map((e) => {
-      // filenames are stored as "<timestamp>__<original-name>.pdf"
       const [, ...rest] = e.name.split("__");
       const originalName = rest.length > 0 ? rest.join("__") : e.name;
       return { filename: e.name, originalName, size: 0 };
     });
-}
-
-export async function getAllProjectPdfs(): Promise<
-  { project: Project; pdfs: PdfEntry[] }[]
-> {
-  const projects = await getProjects();
-  const results = await Promise.all(
-    projects.map(async (project) => ({
-      project,
-      pdfs: await getProjectPdfs(project.slug),
-    }))
-  );
-  return results.filter((r) => r.pdfs.length > 0);
 }
 
 export async function getProjectPdfBytes(
@@ -126,6 +121,66 @@ export async function deleteProjectPdf(slug: string, filename: string): Promise<
   const existing = await getFileBytes(path);
   if (!existing) return;
   await deleteFile(path, existing.sha, `Remove PDF from ${slug}: ${filename}`);
+}
+
+// ---- project images (optional, per project — used for a carousel) ----
+
+function imageDir(slug: string) {
+  return `${PROJECTS_DIR}/${slug}/images`;
+}
+
+export async function getProjectImages(slug: string): Promise<PdfEntry[]> {
+  const entries = await listDir(imageDir(slug));
+  return entries
+    .filter((e) => e.type === "file")
+    .map((e) => {
+      const [, ...rest] = e.name.split("__");
+      const originalName = rest.length > 0 ? rest.join("__") : e.name;
+      return { filename: e.name, originalName, size: 0 };
+    });
+}
+
+export async function getProjectImageBytes(
+  slug: string,
+  filename: string
+): Promise<Buffer | null> {
+  const result = await getFileBytes(`${imageDir(slug)}/${filename}`);
+  return result?.bytes ?? null;
+}
+
+export async function addProjectImage(
+  slug: string,
+  originalName: string,
+  bytes: Buffer
+): Promise<PdfEntry> {
+  const safeName = originalName.replace(/[^a-zA-Z0-9._-]/g, "_");
+  const filename = `${Date.now()}__${safeName}`;
+  await putFileBytes(
+    `${imageDir(slug)}/${filename}`,
+    bytes,
+    `Add image to ${slug}: ${originalName}`
+  );
+  return { filename, originalName, size: bytes.length };
+}
+
+export async function deleteProjectImage(slug: string, filename: string): Promise<void> {
+  const path = `${imageDir(slug)}/${filename}`;
+  const existing = await getFileBytes(path);
+  if (!existing) return;
+  await deleteFile(path, existing.sha, `Remove image from ${slug}: ${filename}`);
+}
+
+export async function getAllProjectPdfs(): Promise<
+  { project: Project; pdfs: PdfEntry[] }[]
+> {
+  const projects = await getProjects();
+  const results = await Promise.all(
+    projects.map(async (project) => ({
+      project,
+      pdfs: await getProjectPdfs(project.slug),
+    }))
+  );
+  return results.filter((r) => r.pdfs.length > 0);
 }
 
 // ---- standalone documents ----
@@ -200,6 +255,96 @@ export async function deleteDocument(filename: string): Promise<void> {
   const existingMetadata = await getFile(metadataPath);
   if (existingMetadata) {
     await deleteFile(metadataPath, existingMetadata.sha, `Remove document metadata: ${filename}`);
+  }
+}
+
+// ---- certifications ----
+
+export type Certification = {
+  slug: string;
+  title: string;
+  issuer: string;
+  date: string;
+  credentialId: string;
+  badgeLabel: string;
+  badgeUrl: string;
+  pdfFilename: string;
+  pdfOriginalName: string;
+  pdfSize: number;
+};
+
+const CERTIFICATIONS_DIR = "content/certifications";
+const CERTIFICATION_FILES_DIR = `${CERTIFICATIONS_DIR}/files`;
+
+function certificationMetadataPath(slug: string) {
+  return `${CERTIFICATIONS_DIR}/${slug}.json`;
+}
+
+export async function getCertifications(): Promise<Certification[]> {
+  const entries = await listDir(CERTIFICATIONS_DIR);
+  const metadataFiles = entries.filter(
+    (entry) => entry.type === "file" && entry.name.endsWith(".json")
+  );
+  const certifications = await Promise.all(
+    metadataFiles.map(async (entry) => {
+      const file = await getFile(entry.path);
+      if (!file) return null;
+      return JSON.parse(file.content) as Certification;
+    })
+  );
+  return certifications
+    .filter((certification): certification is Certification => certification !== null)
+    .sort((a, b) => a.title.localeCompare(b.title));
+}
+
+export async function getCertificationPdfBytes(filename: string): Promise<Buffer | null> {
+  const result = await getFileBytes(`${CERTIFICATION_FILES_DIR}/${filename}`);
+  return result?.bytes ?? null;
+}
+
+export async function saveCertification(
+  certification: Certification,
+  pdf?: { filename: string; bytes: Buffer }
+): Promise<void> {
+  const metadataPath = certificationMetadataPath(certification.slug);
+  const existing = await getFile(metadataPath);
+
+  if (pdf) {
+    await putFileBytes(
+      `${CERTIFICATION_FILES_DIR}/${pdf.filename}`,
+      pdf.bytes,
+      `Add certificate PDF: ${certification.title}`
+    );
+  }
+
+  await putFile(
+    metadataPath,
+    JSON.stringify(certification, null, 2),
+    existing ? `Update certification: ${certification.title}` : `Add certification: ${certification.title}`,
+    existing?.sha
+  );
+}
+
+export async function deleteCertificationPdf(certification: Certification): Promise<void> {
+  if (!certification.pdfFilename) return;
+  const pdfPath = `${CERTIFICATION_FILES_DIR}/${certification.pdfFilename}`;
+  const existingPdf = await getFileBytes(pdfPath);
+  if (existingPdf) {
+    await deleteFile(pdfPath, existingPdf.sha, `Remove certificate PDF: ${certification.title}`);
+  }
+}
+
+export async function deleteCertification(certification: Certification): Promise<void> {
+  await deleteCertificationPdf(certification);
+
+  const metadataPath = certificationMetadataPath(certification.slug);
+  const existingMetadata = await getFile(metadataPath);
+  if (existingMetadata) {
+    await deleteFile(
+      metadataPath,
+      existingMetadata.sha,
+      `Remove certification: ${certification.title}`
+    );
   }
 }
 

@@ -199,6 +199,8 @@ const __TURBOPACK__default__export__ = {
 // Static site content that rarely changes — projects and blog posts live
 // in GitHub now (see src/lib/content-store.ts) and are editable from /admin.
 __turbopack_context__.s([
+    "cachedProjectLinks",
+    ()=>cachedProjectLinks,
     "experience",
     ()=>experience,
     "skills",
@@ -231,17 +233,26 @@ const skills = [
             "Supabase",
             "Firebase",
             "AWS",
-            "Kafka",
-            "Docker"
+            "Docker",
+            "Kubernetes"
         ]
     },
     {
-        group: "QA",
+        group: "QA/QE",
         items: [
             "Jira",
             "Playwright",
             "Cypress",
             "Agile / Scrum"
+        ]
+    },
+    {
+        group: "Cybersecurity",
+        items: [
+            "Kali Linux",
+            "Metasploit",
+            "Wireshark",
+            "Nmap"
         ]
     }
 ];
@@ -262,6 +273,14 @@ const experience = [
         detail: "IT administration and support."
     }
 ];
+const cachedProjectLinks = {
+    "kevron-chemist": [
+        {
+            label: "LinkedIn",
+            url: "https://www.linkedin.com/in/luke-mbogo254/"
+        }
+    ]
+};
 }),
 ];
 

@@ -1,9 +1,10 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
-import type { DocumentEntry, PdfEntry, Post, Project } from "@/lib/content-store";
+import type { Certification, DocumentEntry, PdfEntry, Post, Project } from "@/lib/content-store";
 
-type Tab = "projects" | "documents" | "posts";
+type Tab = "projects" | "documents" | "certifications" | "posts";
 
 const inputClass =
   "w-full bg-transparent border border-[var(--line)] rounded px-3 py-2 text-sm";
@@ -12,9 +13,17 @@ const buttonClass =
   "text-sm border border-[var(--accent)] text-[var(--accent)] rounded px-4 py-2 disabled:opacity-50";
 
 function emptyProject(): Project {
-  return { slug: "", order: Date.now(), name: "", role: "", blurb: "", stack: [], notes: [] };
+  return {
+    slug: "",
+    order: Date.now(),
+    name: "",
+    role: "",
+    blurb: "",
+    stack: [],
+    notes: [],
+    links: [],
+  };
 }
-
 
 function DocumentsManager({
   documents,
@@ -53,40 +62,81 @@ function DocumentsManager({
       >
         <div>
           <label className={labelClass}>Title</label>
-          <input required value={title} onChange={(event) => setTitle(event.target.value)} className={inputClass} />
+          <input
+            required
+            value={title}
+            onChange={(event) => setTitle(event.target.value)}
+            className={inputClass}
+          />
         </div>
         <div>
           <label className={labelClass}>Description</label>
-          <textarea value={description} onChange={(event) => setDescription(event.target.value)} className={inputClass} rows={3} />
+          <textarea
+            value={description}
+            onChange={(event) => setDescription(event.target.value)}
+            className={inputClass}
+            rows={3}
+          />
         </div>
         <div>
           <label className={labelClass}>Link to a post (optional)</label>
-          <select value={postSlug} onChange={(event) => setPostSlug(event.target.value)} className={inputClass}>
+          <select
+            value={postSlug}
+            onChange={(event) => setPostSlug(event.target.value)}
+            className={inputClass}
+          >
             <option value="">No post</option>
-            {posts.map((post) => <option key={post.slug} value={post.slug}>{post.title}</option>)}
+            {posts.map((post) => (
+              <option key={post.slug} value={post.slug}>
+                {post.title}
+              </option>
+            ))}
           </select>
         </div>
         <input name="file" type="file" accept="application/pdf" required className="text-sm" />
-        <button type="submit" className={`self-start ${buttonClass}`}>Upload document</button>
+        <button type="submit" className={`self-start ${buttonClass}`}>
+          Upload document
+        </button>
       </form>
 
       <div className="flex flex-col gap-3">
         {documents.map((document) => (
-          <div key={document.filename} className="border border-[var(--line)] rounded-lg p-4 flex items-center justify-between gap-4">
+          <div
+            key={document.filename}
+            className="border border-[var(--line)] rounded-lg p-4 flex items-center justify-between gap-4"
+          >
             <div>
-              <a href={`/api/documents/${encodeURIComponent(document.filename)}`} target="_blank" rel="noopener noreferrer" className="text-[var(--accent)]">
+              <a
+                href={`/api/documents/${encodeURIComponent(document.filename)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[var(--accent)]"
+              >
                 {document.title}
               </a>
-              <p className="text-sm text-[var(--fg-dim)]">{document.originalName}{document.postSlug ? ` · linked to ${posts.find((post) => post.slug === document.postSlug)?.title ?? document.postSlug}` : ""}</p>
+              <p className="text-sm text-[var(--fg-dim)]">
+                {document.originalName}
+                {document.postSlug
+                  ? ` · linked to ${posts.find((post) => post.slug === document.postSlug)?.title ?? document.postSlug}`
+                  : ""}
+              </p>
             </div>
-            <button onClick={() => onRemove(document.filename)} className="text-sm text-[var(--fg-dim)] hover:text-red-400">Remove</button>
+            <button
+              onClick={() => onRemove(document.filename)}
+              className="text-sm text-[var(--fg-dim)] hover:text-red-400"
+            >
+              Remove
+            </button>
           </div>
         ))}
-        {documents.length === 0 && <p className="text-sm text-[var(--fg-dim)]">No standalone documents.</p>}
+        {documents.length === 0 && (
+          <p className="text-sm text-[var(--fg-dim)]">No standalone documents.</p>
+        )}
       </div>
     </div>
   );
 }
+
 function emptyPost(): Post {
   return {
     slug: "",
@@ -97,29 +147,163 @@ function emptyPost(): Post {
   };
 }
 
+function CertificationsManager({
+  certifications,
+  onSave,
+  onRemove,
+}: {
+  certifications: Certification[];
+  onSave: (form: FormData, slug?: string) => void;
+  onRemove: (slug: string) => void;
+}) {
+  const [editingSlug, setEditingSlug] = useState<string | null>(null);
+  const [title, setTitle] = useState("");
+  const [issuer, setIssuer] = useState("");
+  const [date, setDate] = useState("");
+  const [credentialId, setCredentialId] = useState("");
+  const [badgeLabel, setBadgeLabel] = useState("");
+  const [badgeUrl, setBadgeUrl] = useState("");
+
+  return (
+    <div className="flex flex-col gap-8">
+      <form
+        className="border border-[var(--line)] rounded-lg p-5 flex flex-col gap-4"
+        onSubmit={(event) => {
+          event.preventDefault();
+          const input = event.currentTarget.elements.namedItem("certificate");
+          if (!(input instanceof HTMLInputElement) || !title.trim() || !issuer.trim()) return;
+          const form = new FormData();
+          if (input.files?.[0]) form.set("file", input.files[0]);
+          form.set("title", title);
+          form.set("issuer", issuer);
+          form.set("date", date);
+          form.set("credentialId", credentialId);
+          form.set("badgeLabel", badgeLabel);
+          form.set("badgeUrl", badgeUrl);
+          onSave(form, editingSlug ?? undefined);
+          setTitle("");
+          setIssuer("");
+          setDate("");
+          setCredentialId("");
+          setBadgeLabel("");
+          setBadgeUrl("");
+          input.value = "";
+          setEditingSlug(null);
+        }}
+      >
+        <div>
+          <label className={labelClass}>Certification title</label>
+          <input required value={title} onChange={(event) => setTitle(event.target.value)} className={inputClass} />
+        </div>
+        <div>
+          <label className={labelClass}>Issuing organisation</label>
+          <input required value={issuer} onChange={(event) => setIssuer(event.target.value)} className={inputClass} />
+        </div>
+        <div className="grid sm:grid-cols-2 gap-4">
+          <div>
+            <label className={labelClass}>Date (optional)</label>
+            <input type="date" value={date} onChange={(event) => setDate(event.target.value)} className={inputClass} />
+          </div>
+          <div>
+            <label className={labelClass}>Credential ID (optional)</label>
+            <input value={credentialId} onChange={(event) => setCredentialId(event.target.value)} className={inputClass} />
+          </div>
+        </div>
+        <div>
+          <label className={labelClass}>Badge link title (optional)</label>
+          <input placeholder="View Credly badge" value={badgeLabel} onChange={(event) => setBadgeLabel(event.target.value)} className={inputClass} />
+        </div>
+        <div>
+          <label className={labelClass}>Badge link URL (optional)</label>
+          <input type="url" placeholder="https://www.credly.com/..." value={badgeUrl} onChange={(event) => setBadgeUrl(event.target.value)} className={inputClass} />
+        </div>
+        <input name="certificate" type="file" accept="application/pdf" className="text-sm" />
+        <div className="flex gap-3">
+          <button type="submit" className={buttonClass}>
+            {editingSlug ? "Save changes" : "Add certification"}
+          </button>
+          {editingSlug && (
+            <button
+              type="button"
+              onClick={() => {
+                setEditingSlug(null);
+                setTitle("");
+                setIssuer("");
+                setDate("");
+                setCredentialId("");
+                setBadgeLabel("");
+                setBadgeUrl("");
+              }}
+              className="text-sm text-[var(--fg-dim)] hover:text-[var(--fg)]"
+            >
+              Cancel
+            </button>
+          )}
+        </div>
+      </form>
+
+      <div className="flex flex-col gap-3">
+        {certifications.map((certification) => (
+          <div key={certification.slug} className="border border-[var(--line)] rounded-lg p-4 flex items-center justify-between gap-4">
+            <div>
+              <p className="font-[family-name:var(--font-display)]">{certification.title}</p>
+              <p className="text-sm text-[var(--fg-dim)]">{certification.issuer}{certification.pdfFilename ? " · PDF attached" : ""}</p>
+            </div>
+            <div className="flex gap-3 text-sm">
+              <button
+                type="button"
+                onClick={() => {
+                  setEditingSlug(certification.slug);
+                  setTitle(certification.title);
+                  setIssuer(certification.issuer);
+                  setDate(certification.date);
+                  setCredentialId(certification.credentialId);
+                  setBadgeLabel(certification.badgeLabel);
+                  setBadgeUrl(certification.badgeUrl);
+                }}
+                className="text-[var(--fg-dim)] hover:text-[var(--fg)]"
+              >
+                Edit
+              </button>
+              <button type="button" onClick={() => onRemove(certification.slug)} className="text-[var(--fg-dim)] hover:text-red-400">
+                Remove
+              </button>
+            </div>
+          </div>
+        ))}
+        {certifications.length === 0 && <p className="text-sm text-[var(--fg-dim)]">No certifications added yet.</p>}
+      </div>
+    </div>
+  );
+}
+
 export default function AdminDashboard({
   initialProjects,
   initialPosts,
   initialPdfs,
+  initialImages,
   initialDocuments,
+  initialCertifications,
 }: {
   initialProjects: Project[];
   initialPosts: Post[];
   initialPdfs: Record<string, PdfEntry[]>;
+  initialImages: Record<string, PdfEntry[]>;
   initialDocuments: DocumentEntry[];
+  initialCertifications: Certification[];
 }) {
   const [tab, setTab] = useState<Tab>("projects");
   const [projects, setProjects] = useState(initialProjects);
   const [posts, setPosts] = useState(initialPosts);
   const [pdfs, setPdfs] = useState(initialPdfs);
+  const [images, setImages] = useState(initialImages);
   const [documents, setDocuments] = useState(initialDocuments);
+  const [certifications, setCertifications] = useState(initialCertifications);
 
   const [editingProject, setEditingProject] = useState<Project | null>(null);
   const [editingPost, setEditingPost] = useState<Post | null>(null);
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
-
-  // ---- projects ----
 
   async function saveProject(project: Project, isNew: boolean) {
     setError("");
@@ -148,11 +332,16 @@ export default function AdminDashboard({
   }
 
   async function removeProject(slug: string) {
-    if (!confirm("Delete this project and its attached PDFs?")) return;
+    if (!confirm("Delete this project and its attached PDFs and screenshots?")) return;
     const res = await fetch(`/api/admin/projects/${slug}`, { method: "DELETE" });
     if (res.ok) {
       setProjects((prev) => prev.filter((p) => p.slug !== slug));
       setPdfs((prev) => {
+        const next = { ...prev };
+        delete next[slug];
+        return next;
+      });
+      setImages((prev) => {
         const next = { ...prev };
         delete next[slug];
         return next;
@@ -190,6 +379,36 @@ export default function AdminDashboard({
     }
   }
 
+  async function uploadImage(slug: string, file: File) {
+    setError("");
+    const form = new FormData();
+    form.set("file", file);
+    const res = await fetch(`/api/admin/projects/${slug}/images`, {
+      method: "POST",
+      body: form,
+    });
+    const data = await res.json();
+    if (!res.ok) {
+      setError(data.error ?? "Image upload failed.");
+      return;
+    }
+    setImages((prev) => ({ ...prev, [slug]: [...(prev[slug] ?? []), data.entry] }));
+  }
+
+  async function removeImage(slug: string, filename: string) {
+    const res = await fetch(`/api/admin/projects/${slug}/images`, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ filename }),
+    });
+    if (res.ok) {
+      setImages((prev) => ({
+        ...prev,
+        [slug]: (prev[slug] ?? []).filter((f) => f.filename !== filename),
+      }));
+    }
+  }
+
   async function uploadDocument(form: FormData) {
     setError("");
     const res = await fetch("/api/admin/documents", { method: "POST", body: form });
@@ -210,7 +429,32 @@ export default function AdminDashboard({
     if (res.ok) setDocuments((prev) => prev.filter((document) => document.filename !== filename));
   }
 
-  // ---- posts ----
+  async function saveCertification(form: FormData, slug?: string) {
+    setError("");
+    if (slug) form.set("slug", slug);
+    const res = await fetch("/api/admin/certifications", {
+      method: slug ? "PUT" : "POST",
+      body: form,
+    });
+    const data = await res.json();
+    if (!res.ok) {
+      setError(data.error ?? "Certification save failed.");
+      return;
+    }
+    setCertifications((prev) => {
+      const without = prev.filter((certification) => certification.slug !== data.certification.slug);
+      return [...without, data.certification].sort((a, b) => a.title.localeCompare(b.title));
+    });
+  }
+
+  async function removeCertification(slug: string) {
+    const res = await fetch("/api/admin/certifications", {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ slug }),
+    });
+    if (res.ok) setCertifications((prev) => prev.filter((certification) => certification.slug !== slug));
+  }
 
   async function savePost(post: Post, isNew: boolean) {
     setError("");
@@ -243,17 +487,18 @@ export default function AdminDashboard({
 
   return (
     <div className="flex flex-col gap-8">
-      <div className="flex gap-2 border-b border-[var(--line)]">
-        {(["projects", "documents", "posts"] as Tab[]).map((t) => (
+      <div className="flex gap-2 overflow-x-auto border-b border-[var(--line)]">
+        {(["projects", "documents", "certifications", "posts"] as Tab[]).map((t) => (
           <button
             key={t}
+            type="button"
             onClick={() => {
               setTab(t);
               setEditingProject(null);
               setEditingPost(null);
               setError("");
             }}
-            className={`text-sm px-3 py-2 -mb-px border-b-2 capitalize ${
+            className={`shrink-0 text-sm px-3 py-2 -mb-px border-b-2 capitalize ${
               tab === t
                 ? "border-[var(--accent)] text-[var(--accent)]"
                 : "border-transparent text-[var(--fg-dim)]"
@@ -349,6 +594,46 @@ export default function AdminDashboard({
                     className="text-sm"
                   />
                 </div>
+
+                <div className="mt-4 pt-4 border-t border-[var(--line)]">
+                  <p className="text-xs text-[var(--fg-dim)] mb-2">
+                    Screenshots (optional, shown as a carousel)
+                  </p>
+                  <div className="flex flex-wrap gap-2 mb-3">
+                    {(images[project.slug] ?? []).map((img) => (
+                      <div key={img.filename} className="relative">
+                        <Image
+                          src={`/api/images/${project.slug}/${encodeURIComponent(img.filename)}`}
+                          alt={img.originalName}
+                          width={80}
+                          height={80}
+                          unoptimized
+                          className="w-20 h-20 object-cover rounded border border-[var(--line)]"
+                        />
+                        <button
+                          onClick={() => removeImage(project.slug, img.filename)}
+                          className="absolute -top-2 -right-2 w-5 h-5 rounded-full bg-[var(--bg)] border border-[var(--line)] text-xs text-[var(--fg-dim)] hover:text-red-400"
+                          aria-label="Remove image"
+                        >
+                          ×
+                        </button>
+                      </div>
+                    ))}
+                    {(images[project.slug] ?? []).length === 0 && (
+                      <p className="text-sm text-[var(--fg-dim)]">No screenshots.</p>
+                    )}
+                  </div>
+                  <input
+                    type="file"
+                    accept="image/jpeg,image/png,image/webp"
+                    onChange={(e) => {
+                      const file = e.target.files?.[0];
+                      if (file) uploadImage(project.slug, file);
+                      e.target.value = "";
+                    }}
+                    className="text-sm"
+                  />
+                </div>
               </div>
             ))}
           </div>
@@ -359,6 +644,12 @@ export default function AdminDashboard({
           posts={posts}
           onUpload={uploadDocument}
           onRemove={removeDocument}
+        />
+      ) : tab === "certifications" ? (
+        <CertificationsManager
+          certifications={certifications}
+          onSave={saveCertification}
+          onRemove={removeCertification}
         />
       ) : (
         <div className="flex flex-col gap-8">
@@ -425,12 +716,32 @@ function ProjectForm({
   onCancel: () => void;
 }) {
   const [form, setForm] = useState(project);
+  const [stackText, setStackText] = useState(project.stack.join(", "));
+  const [notesText, setNotesText] = useState(project.notes.join("\n"));
+  const [linksText, setLinksText] = useState(
+    project.links.map((link) => `${link.label} | ${link.url}`).join("\n")
+  );
 
   return (
     <form
       onSubmit={(e) => {
         e.preventDefault();
-        onSave(form);
+        onSave({
+          ...form,
+          stack: stackText.split(",").map((value) => value.trim()).filter(Boolean),
+          notes: notesText.split("\n").map((value) => value.trim()).filter(Boolean),
+          links: linksText
+            .split("\n")
+            .map((line) => {
+              const separator = line.indexOf("|");
+              if (separator < 0) return { label: "", url: "" };
+              return {
+                label: line.slice(0, separator).trim(),
+                url: line.slice(separator + 1).trim(),
+              };
+            })
+            .filter((link) => link.label && link.url),
+        });
       }}
       className="border border-[var(--line)] rounded-lg p-5 flex flex-col gap-4"
     >
@@ -463,13 +774,8 @@ function ProjectForm({
       <div>
         <label className={labelClass}>Stack (comma-separated)</label>
         <input
-          value={form.stack.join(", ")}
-          onChange={(e) =>
-            setForm({
-              ...form,
-              stack: e.target.value.split(",").map((s) => s.trim()).filter(Boolean),
-            })
-          }
+          value={stackText}
+          onChange={(e) => setStackText(e.target.value)}
           className={inputClass}
         />
       </div>
@@ -477,13 +783,20 @@ function ProjectForm({
         <label className={labelClass}>Notes (one per line)</label>
         <textarea
           rows={3}
-          value={form.notes.join("\n")}
-          onChange={(e) =>
-            setForm({
-              ...form,
-              notes: e.target.value.split("\n").map((s) => s.trim()).filter(Boolean),
-            })
-          }
+          value={notesText}
+          onChange={(e) => setNotesText(e.target.value)}
+          className={inputClass}
+        />
+      </div>
+      <div>
+        <label className={labelClass}>
+          External links (one per line, format: Label | https://url)
+        </label>
+        <textarea
+          rows={3}
+          placeholder="LinkedIn post | https://linkedin.com/posts/..."
+          value={linksText}
+          onChange={(e) => setLinksText(e.target.value)}
           className={inputClass}
         />
       </div>

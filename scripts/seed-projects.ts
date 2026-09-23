@@ -34,6 +34,7 @@ const seedProjects: Project[] = [
       "Expanded into a React Native app with separate customer and rider route groups",
       "Diagnosed and fixed a production deployment issue tied to external AI calls during login",
     ],
+    links: [],
   },
   {
     slug: "shamba-pro",
@@ -56,6 +57,7 @@ const seedProjects: Project[] = [
       "Farm constants built in: 114-day gestation, 90kg target weight, KES 350/kg",
       "Full dashboard covering animals, records, reports, breeding, settings",
     ],
+    links: [],
   },
   {
     slug: "kenya-sentinel",
@@ -66,6 +68,7 @@ const seedProjects: Project[] = [
       "A monitoring and detection system built around a streaming data pipeline, with a trained classification model behind it and infrastructure to run it in production.",
     stack: ["FastAPI", "Kafka", "Docker", "Scikit-learn", "AWS"],
     notes: [],
+    links: [],
   },
 ];
 

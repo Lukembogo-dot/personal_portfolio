@@ -12,12 +12,16 @@ export const skills = [
   },
   {
     group: "Data & cloud",
-    items: ["PostgreSQL", "Supabase", "Firebase", "AWS", "Kafka", "Docker"],
+    items: ["PostgreSQL", "Supabase", "Firebase", "AWS", "Docker", "Kubernetes"],
   },
   {
-    group: "QA",
+    group: "QA/QE",
     items: ["Jira", "Playwright", "Cypress", "Agile / Scrum"],
   },
+  {
+    group: "Cybersecurity",
+    items: ["Kali Linux", "Metasploit", "Wireshark", "Nmap"]
+  }
 ];
 
 export const experience = [
@@ -37,3 +41,14 @@ export const experience = [
     detail: "IT administration and support.",
   },
 ];
+
+// Public project links kept in the app instead of the GitHub content store.
+// Replace the URL with the specific LinkedIn post when it is available.
+export const cachedProjectLinks: Record<string, { label: string; url: string }[]> = {
+  "kevron-chemist": [
+    {
+      label: "LinkedIn",
+      url: "https://www.linkedin.com/in/luke-mbogo254/",
+    },
+  ],
+};
