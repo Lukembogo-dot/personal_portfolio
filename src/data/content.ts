@@ -42,13 +42,3 @@ export const experience = [
   },
 ];
 
-// Public project links kept in the app instead of the GitHub content store.
-// Replace the URL with the specific LinkedIn post when it is available.
-export const cachedProjectLinks: Record<string, { label: string; url: string }[]> = {
-  "kevron-chemist": [
-    {
-      label: "LinkedIn",
-      url: "https://www.linkedin.com/in/luke-mbogo254/",
-    },
-  ],
-};

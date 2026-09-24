@@ -69,7 +69,7 @@ async function DocumentsPage({ searchParams }) {
                                     href: `/api/documents/${encodeURIComponent(document.filename)}`,
                                     target: "_blank",
                                     rel: "noopener noreferrer",
-                                    className: "text-sm text-[var(--accent)] border-b border-[var(--accent)] pb-0.5",
+                                    className: "break-words text-sm text-[var(--accent)] border-b border-[var(--accent)] pb-0.5",
                                     children: document.title
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/documents/page.tsx",

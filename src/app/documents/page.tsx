@@ -38,7 +38,7 @@ export default async function DocumentsPage({
                   href={`/api/documents/${encodeURIComponent(document.filename)}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sm text-[var(--accent)] border-b border-[var(--accent)] pb-0.5"
+                  className="break-words text-sm text-[var(--accent)] border-b border-[var(--accent)] pb-0.5"
                 >
                   {document.title}
                 </a>

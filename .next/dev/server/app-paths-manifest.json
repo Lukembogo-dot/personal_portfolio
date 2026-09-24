@@ -1,9 +1,7 @@
 {
-  "/admin/page": "app/admin/page.js",
-  "/api/images/[slug]/[filename]/route": "app/api/images/[slug]/[filename]/route.js",
+  "/about/page": "app/about/page.js",
   "/blog/page": "app/blog/page.js",
   "/contact/page": "app/contact/page.js",
   "/page": "app/page.js",
-  "/projects/[slug]/page": "app/projects/[slug]/page.js",
   "/projects/page": "app/projects/page.js"
 }

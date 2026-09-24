@@ -2,7 +2,6 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { getProject, getProjectImages, getProjectPdfs } from "@/lib/content-store";
 import Carousel from "@/components/Carousel";
-import { cachedProjectLinks } from "@/data/content";
 
 export const dynamic = "force-dynamic";
 
@@ -17,10 +16,7 @@ export default async function ProjectPage({
 
   const pdfs = await getProjectPdfs(slug);
   const images = await getProjectImages(slug);
-  const links = [
-    ...project.links,
-    ...(cachedProjectLinks[slug] ?? []),
-  ].filter(
+  const links = project.links.filter(
     (link, index, allLinks) => {
       let isExternalUrl = false;
       try {
@@ -48,7 +44,7 @@ export default async function ProjectPage({
       </Link>
 
       <p className="mt-8 text-sm text-[var(--accent)]">{project.role}</p>
-      <h1 className="mt-2 font-[family-name:var(--font-display)] text-3xl lg:text-4xl">
+      <h1 className="mt-2 break-words font-[family-name:var(--font-display)] text-3xl lg:text-4xl">
         {project.name}
       </h1>
 
@@ -96,7 +92,7 @@ export default async function ProjectPage({
                   href={`/api/pdfs/${slug}/${encodeURIComponent(pdf.filename)}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sm text-[var(--accent)] border-b border-[var(--accent)] pb-0.5"
+                  className="break-words text-sm text-[var(--accent)] border-b border-[var(--accent)] pb-0.5"
                 >
                   {pdf.originalName}
                 </a>

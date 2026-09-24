@@ -15,7 +15,7 @@ export default function ContactPage() {
           <div className="mt-8 flex flex-wrap gap-3">
             <a
               href="mailto:lukembogo5@gmail.com"
-              className="inline-flex items-center rounded border border-[var(--accent)] bg-[var(--accent)]/10 px-4 py-2 text-sm font-medium text-[var(--accent)] transition hover:bg-[var(--accent)] hover:text-[var(--bg)]"
+              className="inline-flex max-w-full items-center rounded border border-[var(--accent)] bg-[var(--accent)]/10 px-4 py-2 text-sm font-medium text-[var(--accent)] transition hover:bg-[var(--accent)] hover:text-[var(--bg)]"
             >
               lukembogo5@gmail.com
             </a>

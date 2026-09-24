@@ -94,6 +94,12 @@
   box-sizing: border-box;
 }
 
+html,
+body {
+  max-width: 100%;
+  overflow-x: clip;
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -104,6 +110,30 @@ body {
   font-family: var(--font-body);
   line-height: 1.7;
   transition: background 0.15s ease, color 0.15s ease;
+}
+
+a,
+button {
+  overflow-wrap: anywhere;
+}
+
+img,
+svg {
+  max-width: 100%;
+}
+
+@media (max-width: 639px) {
+  .mesh-cluster-a {
+    left: -9rem;
+    width: 20rem;
+    height: 20rem;
+  }
+
+  .mesh-cluster-b {
+    right: -10rem;
+    width: 22rem;
+    height: 22rem;
+  }
 }
 
 @keyframes mesh-drift-a {
