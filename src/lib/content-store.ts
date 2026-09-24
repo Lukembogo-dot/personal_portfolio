@@ -170,19 +170,6 @@ export async function deleteProjectImage(slug: string, filename: string): Promis
   await deleteFile(path, existing.sha, `Remove image from ${slug}: ${filename}`);
 }
 
-export async function getAllProjectPdfs(): Promise<
-  { project: Project; pdfs: PdfEntry[] }[]
-> {
-  const projects = await getProjects();
-  const results = await Promise.all(
-    projects.map(async (project) => ({
-      project,
-      pdfs: await getProjectPdfs(project.slug),
-    }))
-  );
-  return results.filter((r) => r.pdfs.length > 0);
-}
-
 // ---- standalone documents ----
 
 export type DocumentEntry = {
