@@ -1,0 +1,23 @@
+{
+  "slug": "bug-tracker",
+  "order": 1790271380874,
+  "name": "Bug Tracker",
+  "role": "Fullstack",
+  "blurb": "Completed a full-stack Bug Tracking System designed to help teams manage projects, track bugs, and collaborate efficiently.",
+  "stack": [
+    "next.js",
+    "react",
+    "TypeScript",
+    "REST API",
+    "PostgreSQL"
+  ],
+  "notes": [
+    "Secure user authentication (signup & login)",
+    "Project creation and management",
+    "Bug reporting with priority levels (Low → Critical)",
+    "Bug status tracking",
+    "Commenting for collaboration",
+    "Role-based dashboards (Admin & User)"
+  ],
+  "links": []
+}
